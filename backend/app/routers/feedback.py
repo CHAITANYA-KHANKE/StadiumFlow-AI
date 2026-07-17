@@ -1,25 +1,21 @@
 import time
-import os
-from fastapi import APIRouter, HTTPException, Header
-from typing import Optional, List, Dict, Any
+from fastapi import APIRouter, Depends
+from typing import List, Dict, Any
 
 from backend.app.schemas.stadium import FeedbackSchema
+from backend.app.core.security import verify_admin_token
 
 router = APIRouter()
 
-# Prototype feedbacks database
+# Prototype in-memory feedbacks database
 feedbacks_db: List[Dict[str, Any]] = []
-
-def verify_admin_token(x_admin_token: Optional[str] = Header(None)):
-    expected_token = os.getenv("ADMIN_SECRET_KEY", "stadiumflow-admin-secret-token")
-    if not x_admin_token or x_admin_token != expected_token:
-        raise HTTPException(
-            status_code=401, 
-            detail="Unauthorized operator token. X-Admin-Token header missing or incorrect."
-        )
 
 @router.post("/api/feedback")
 def submit_feedback(request: FeedbackSchema):
+    """
+    Submit spectator feedback for a specific facility or routing recommendation.
+    Publicly accessible endpoint.
+    """
     feedbacks_db.append({
         "location_id": request.location_id,
         "helpful": request.helpful,
@@ -29,6 +25,9 @@ def submit_feedback(request: FeedbackSchema):
     return {"status": "success", "message": "Feedback submitted successfully."}
 
 @router.get("/api/feedback")
-def get_all_feedbacks(x_admin_token: Optional[str] = Header(None)):
-    verify_admin_token(x_admin_token)
+def get_all_feedbacks(admin_token: str = Depends(verify_admin_token)):
+    """
+    Retrieve all collected spectator feedbacks.
+    Requires a valid operator admin token.
+    """
     return feedbacks_db

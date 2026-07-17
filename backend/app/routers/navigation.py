@@ -1,4 +1,3 @@
-import time
 import os
 import re
 import json
@@ -23,6 +22,10 @@ NODE_ID_REGEX = re.compile(r"^[a-zA-Z0-9_]{1,50}$")
 
 @router.get("/api/stadium", response_model=StadiumSchema)
 def get_stadium_topology():
+    """
+    Retrieve the static topology (nodes and edges) representing the World Cup stadium graph.
+    Caches the schema in memory to optimize load times.
+    """
     global cached_stadium_schema
     if cached_stadium_schema is None:
         cached_stadium_schema = StadiumSchema(
@@ -33,10 +36,17 @@ def get_stadium_topology():
 
 @router.get("/api/live-state", response_model=LiveStateSchema)
 def get_live_state():
+    """
+    Retrieve the real-time queue times, gate/facility closures, concourse congestions, and active alerts.
+    """
     return LiveStateSchema(**live_state_manager.get_live_state())
 
 @router.post("/api/route", response_model=RouteResponse)
 def get_route(request: RouteRequest):
+    """
+    Calculate the optimal pedestrian routing path between two stadium nodes.
+    Supports accessibility parameters to bypass staircases/escalators.
+    """
     if not NODE_ID_REGEX.match(request.start_node_id) or not NODE_ID_REGEX.match(request.end_node_id):
         raise HTTPException(status_code=400, detail="Invalid node ID pattern. Node IDs must be alphanumeric and under 50 characters.")
     try:
@@ -56,7 +66,7 @@ def get_route(request: RouteRequest):
                 total_dist=res.total_distance,
                 est_time=res.estimated_time,
                 avg_cong=res.crowd_congestion_level,
-                lang="en" # default lang
+                lang="en"
             )
             res.reason_explanation = ai_exp
             
@@ -68,6 +78,10 @@ def get_route(request: RouteRequest):
 
 @router.post("/api/recommend-facility", response_model=RecommendationResponse)
 def get_facility_recommendation(request: RecommendationRequest):
+    """
+    Query the queue-aware recommendation engine for the fastest available restroom, food counter, or information stall.
+    Solves for shortest combined walking distance and live queue delay.
+    """
     if not NODE_ID_REGEX.match(request.current_node_id):
         raise HTTPException(status_code=400, detail="Invalid node ID pattern. Node IDs must be alphanumeric and under 50 characters.")
     if request.facility_category not in ["restroom", "food", "medical", "info"]:
@@ -104,6 +118,9 @@ def get_facility_recommendation(request: RecommendationRequest):
 
 @router.post("/api/timeline", response_model=TimelineResponse)
 def get_timeline(request: TimelineRequest):
+    """
+    Generate a personalized event day spectator itinerary timeline based on ticket seat and arrival gate parameters.
+    """
     try:
         return timeline_engine.generate_timeline(request)
     except Exception as e:
@@ -111,6 +128,9 @@ def get_timeline(request: TimelineRequest):
 
 @router.get("/api/matches")
 def get_all_matches():
+    """
+    Fetch the list of FIFA World Cup tournament match results, upcoming fixtures, and knockout bracket state.
+    """
     try:
         path = os.path.join(os.path.dirname(__file__), "..", "data", "matches.json")
         if os.path.exists(path):
@@ -122,6 +142,9 @@ def get_all_matches():
 
 @router.get("/api/players")
 def get_all_players():
+    """
+    Fetch all team squad lists, individual player profiles, and tournament statistics.
+    """
     try:
         path = os.path.join(os.path.dirname(__file__), "..", "data", "players.json")
         if os.path.exists(path):

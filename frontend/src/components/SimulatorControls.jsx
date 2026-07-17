@@ -88,7 +88,20 @@ export default function SimulatorControls({
           return (
             <div
               key={sc.id}
-              onClick={() => !isLoading && setSelectedId(sc.id)}
+              role="button"
+              tabIndex={0}
+              aria-label={`${sc.name}. ${sc.description} Severity: ${sc.severity}. ${
+                isCurrentlyActive ? 'Currently active.' : isSelected ? 'Selected.' : 'Click to select.'
+              }`}
+              onClick={() => {
+                if (!isLoading) setSelectedId(sc.id);
+              }}
+              onKeyDown={(e) => {
+                if (!isLoading && (e.key === 'Enter' || e.key === ' ')) {
+                  e.preventDefault();
+                  setSelectedId(sc.id);
+                }
+              }}
               className="glass-card-interactive"
               style={{
                 border: isCurrentlyActive 

@@ -19,7 +19,6 @@ class AIService:
         if HAS_GEMINI_SDK and self.api_key:
             try:
                 genai.configure(api_key=self.api_key)
-                # We can configure system instructions here
                 self.model = genai.GenerativeModel(
                     model_name=self.model_name,
                     generation_config={"temperature": 0.2}
@@ -46,11 +45,14 @@ class AIService:
             return ""
 
     def explain_route(self, context_str: str, start_name: str, end_name: str, total_dist: float, est_time: float, avg_cong: float, lang: str = "en") -> str:
-        lang_instruction = "Respond in English."
-        if lang in ["hi", "hinglish"]:
+        if lang == "hi":
             lang_instruction = "Respond in Hindi (using Devanagari script, e.g., 'आपका मार्ग गेट सी से शुरू होकर सेक्शन 104 तक जाता है।')."
+        elif lang == "hinglish":
+            lang_instruction = "Respond in Hinglish (Hindi written in the Latin alphabet, e.g., 'Aapka route Gate C se start hokar section 104 tak jata hai.')."
         elif lang == "es":
             lang_instruction = "Respond in Spanish (e.g., 'Su ruta comienza en la Puerta...')."
+        else:
+            lang_instruction = "Respond in English."
         
         sys_inst = (
             "You are the StadiumFlow AI Companion. Your task is to explain the calculated walking navigation path to a fan. "
@@ -70,11 +72,14 @@ class AIService:
         return response
 
     def explain_recommendation(self, context_str: str, recommended_option: str, category: str, est_time: float, time_saved: float, reason_codes: List[str], closest_name: str, lang: str = "en") -> str:
-        lang_instruction = "Respond in English."
-        if lang in ["hi", "hinglish"]:
+        if lang == "hi":
             lang_instruction = "Respond in Hindi (using Devanagari script)."
+        elif lang == "hinglish":
+            lang_instruction = "Respond in Hinglish (Hindi written in the Latin alphabet, e.g., 'Hum recommend karte hain ki aap restroom_l2 use karein kyunki queue choti hai.')."
         elif lang == "es":
             lang_instruction = "Respond in Spanish (e.g., 'Recomendamos usar...')."
+        else:
+            lang_instruction = "Respond in English."
 
         sys_inst = (
             "You are the StadiumFlow AI Companion. Explain a facility recommendation to a spectator. "
@@ -95,11 +100,14 @@ class AIService:
         return response
 
     def explain_operations_brief(self, context_str: str, live_state: Dict[str, Any], nodes: Dict[str, Any], lang: str = "en") -> str:
-        lang_instruction = "Respond in English."
-        if lang in ["hi", "hinglish"]:
+        if lang == "hi":
             lang_instruction = "Respond in Hindi (using Devanagari script)."
+        elif lang == "hinglish":
+            lang_instruction = "Respond in Hinglish (Hindi written in the Latin alphabet, e.g., 'Incident warning: Gate C abhi closed hai.')."
         elif lang == "es":
             lang_instruction = "Respond in Spanish."
+        else:
+            lang_instruction = "Respond in English."
 
         sys_inst = (
             "You are the StadiumFlow AI Operations Assistant. Summarize current stadium operations for the command center. "
@@ -114,11 +122,14 @@ class AIService:
         return response
 
     def answer_assistant_query(self, query: str, context_str: str, current_node: str, live_state: Dict[str, Any], nodes: Dict[str, Any], lang: str = "en") -> str:
-        lang_instruction = "Respond in English."
-        if lang in ["hi", "hinglish"]:
+        if lang == "hi":
             lang_instruction = "Respond in Hindi (using Devanagari script)."
+        elif lang == "hinglish":
+            lang_instruction = "Respond in Hinglish (Hindi written in the Latin alphabet, e.g., 'Aap Facility Explorer tab check kar sakte hain toilet time dekhne ke liye.')."
         elif lang == "es":
             lang_instruction = "Respond in Spanish."
+        else:
+            lang_instruction = "Respond in English."
 
         # Load dynamic players and matches context
         matches_data = []

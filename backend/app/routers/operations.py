@@ -1,11 +1,11 @@
 import time
-import os
-from fastapi import APIRouter, HTTPException, Header
-from typing import Optional, Dict, Any
+from fastapi import APIRouter, HTTPException, Depends
+from typing import Dict, Any
 
 from backend.app.services.live_state_manager import live_state_manager
 from backend.app.services.context_builder import ContextBuilder
 from backend.app.services.ai_service import ai_service
+from backend.app.core.security import verify_admin_token
 
 router = APIRouter()
 
@@ -13,18 +13,14 @@ cached_ops_summary = None
 cached_ops_scenario_id = None
 cached_ops_last_updated = None
 
-def verify_admin_token(x_admin_token: Optional[str] = Header(None)):
-    expected_token = os.getenv("ADMIN_SECRET_KEY", "stadiumflow-admin-secret-token")
-    if not x_admin_token or x_admin_token != expected_token:
-        raise HTTPException(
-            status_code=401, 
-            detail="Unauthorized operator token. X-Admin-Token header missing or incorrect."
-        )
-
 @router.get("/api/operations/summary")
-def get_operations_summary(x_admin_token: Optional[str] = Header(None)):
+def get_operations_summary(admin_token: str = Depends(verify_admin_token)):
+    """
+    Retrieve the real-time AI summary overview of stadium operations.
+    Requires a valid operator admin token.
+    Uses dynamic caching to prevent redundant Gemini API calls.
+    """
     global cached_ops_summary, cached_ops_scenario_id, cached_ops_last_updated
-    verify_admin_token(x_admin_token)
     try:
         live_state = live_state_manager.get_live_state()
         scenario_id = live_state_manager.current_scenario_id
@@ -62,6 +58,10 @@ def get_operations_summary(x_admin_token: Optional[str] = Header(None)):
 
 @router.post("/api/assistant")
 def chat_assistant(request: Dict[str, Any]):
+    """
+    Multilingual conversational assistant for spectators.
+    Answers route, match, player, and general stadium questions using grounded context.
+    """
     query = request.get("query", "")
     current_node = request.get("current_node_id", "gate_a")
     lang = request.get("language", "en")

@@ -1,26 +1,21 @@
-import os
-from fastapi import APIRouter, HTTPException, Header, Depends
-from typing import Optional
+from fastapi import APIRouter, HTTPException, Depends
 
 from backend.app.schemas.simulation import ScenarioTriggerRequest, SimulationImpactResponse
 from backend.app.services.simulation_engine import simulation_engine
 from backend.app.services.live_state_manager import live_state_manager
 from backend.app.services.context_builder import ContextBuilder
 from backend.app.services.ai_service import ai_service
+from backend.app.core.security import verify_admin_token
 
 router = APIRouter()
 
-def verify_admin_token(x_admin_token: Optional[str] = Header(None)):
-    expected_token = os.getenv("ADMIN_SECRET_KEY", "stadiumflow-admin-secret-token")
-    if not x_admin_token or x_admin_token != expected_token:
-        raise HTTPException(
-            status_code=401, 
-            detail="Unauthorized operator token. X-Admin-Token header missing or incorrect."
-        )
-
 @router.post("/api/simulation/scenario", response_model=SimulationImpactResponse)
-def trigger_scenario(request: ScenarioTriggerRequest, x_admin_token: Optional[str] = Header(None)):
-    verify_admin_token(x_admin_token)
+def trigger_scenario(request: ScenarioTriggerRequest, admin_token: str = Depends(verify_admin_token)):
+    """
+    Trigger a 'What-If' incident scenario to simulate stadium network adjustments.
+    Requires a valid operator admin token.
+    Renders live impact reports and updates routing parameters.
+    """
     try:
         res = simulation_engine.trigger_scenario(request.scenario_id)
         
@@ -43,7 +38,10 @@ def trigger_scenario(request: ScenarioTriggerRequest, x_admin_token: Optional[st
         raise HTTPException(status_code=500, detail=f"Internal Server Error: {str(e)}")
 
 @router.post("/api/simulation/reset")
-def reset_simulation(x_admin_token: Optional[str] = Header(None)):
-    verify_admin_token(x_admin_token)
+def reset_simulation(admin_token: str = Depends(verify_admin_token)):
+    """
+    Reset all active incident simulations and restore stadium state parameters to default.
+    Requires a valid operator admin token.
+    """
     msg = simulation_engine.reset_simulation()
     return {"message": msg}
