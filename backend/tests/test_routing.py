@@ -104,3 +104,26 @@ def test_routing_edge_cases():
     # 5. Non-existent scenario on live state manager returns False
     res_apply = live_state_manager.apply_scenario("non_existent_scenario_id")
     assert res_apply is False
+
+
+def test_dijkstra_stale_entry_continue():
+    import heapq
+    from unittest.mock import patch
+    original_heappush = heapq.heappush
+
+    calls = []
+    def mock_heappush(pq, item):
+        original_heappush(pq, item)
+        # If we push concourse_lower_0, also push a stale entry with slightly larger distance
+        if item[1] == "concourse_lower_0" and "fake" not in calls:
+            calls.append("fake")
+            original_heappush(pq, (item[0] + 1.0, "concourse_lower_0"))
+
+    with patch("backend.app.services.routing_engine.heapq.heappush", side_effect=mock_heappush):
+        req = RouteRequest(
+            start_node_id="gate_a",
+            end_node_id="section_101",
+            accessibility_mode=False
+        )
+        res = routing_engine.calculate_route(req)
+        assert len(res.path_nodes) > 0
