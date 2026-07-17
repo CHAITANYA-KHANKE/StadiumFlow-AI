@@ -34,7 +34,10 @@ class AIService:
             return ""
         try:
             full_prompt = f"{system_instruction}\n\nContext:\n{prompt}"
-            response = self.model.generate_content(full_prompt)
+            response = self.model.generate_content(
+                full_prompt,
+                request_options={"timeout": 5.0}
+            )
             if response and response.text:
                 return response.text.strip()
             return ""

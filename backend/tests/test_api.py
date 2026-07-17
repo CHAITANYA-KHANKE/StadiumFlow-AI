@@ -57,14 +57,14 @@ def test_api_timeline():
 def test_api_simulation_scenario():
     response = client.post("/api/simulation/scenario", json={
         "scenario_id": "gate_c_closure"
-    })
+    }, headers={"X-Admin-Token": "stadiumflow-admin-secret-token"})
     assert response.status_code == 200
     data = response.json()
     assert data["scenario_id"] == "gate_c_closure"
     assert len(data["affected_zones"]) > 0
 
 def test_api_simulation_reset():
-    response = client.post("/api/simulation/reset")
+    response = client.post("/api/simulation/reset", headers={"X-Admin-Token": "stadiumflow-admin-secret-token"})
     assert response.status_code == 200
     assert response.json()["message"] == "Simulation state reset to Normal Operations."
 

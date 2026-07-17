@@ -218,7 +218,20 @@ export default function StadiumMap({
                   key={node.id} 
                   transform={`translate(${cx}, ${cy})`}
                   style={{ cursor: 'pointer' }}
-                  onClick={() => onSelectNode && onSelectNode(node)}
+                  role="button"
+                  tabIndex={0}
+                  aria-label={`${node.name || node.id} (${node.category}). ${
+                    node.category === 'gate' ? `Wait time: ${gateWaits[node.id] || 0} minutes.` : ''
+                  } Press enter to select.`}
+                  onClick={() => {
+                    if (onSelectNode) onSelectNode(node);
+                  }}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      if (onSelectNode) onSelectNode(node);
+                    }
+                  }}
                 >
                   {/* Outer selection ring */}
                   {(isStart || isEnd) && (
@@ -267,7 +280,17 @@ export default function StadiumMap({
                       fontWeight={isStart || isEnd ? '700' : '400'}
                       style={{ pointerEvents: 'none', userSelect: 'none', fontFamily: 'var(--font-heading)' }}
                     >
-                      {node.name.split(' (')[0]}
+                      {(() => {
+                        const baseName = node.name.split(' (')[0];
+                        if (closures.has(node.id)) {
+                          return `${baseName} (Closed)`;
+                        }
+                        if (node.category === 'gate') {
+                          const wait = gateWaits[node.id];
+                          return `${baseName} (${wait !== undefined ? wait : 5}m)`;
+                        }
+                        return baseName;
+                      })()}
                     </text>
                   )}
                 </g>

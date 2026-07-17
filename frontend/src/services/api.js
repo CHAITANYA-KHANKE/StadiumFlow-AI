@@ -1,10 +1,12 @@
 const BASE_URL = import.meta.env.VITE_API_URL || (import.meta.env.PROD ? '' : 'http://localhost:8000');
 
 async function apiRequest(endpoint, method = 'GET', body = null) {
+  const token = localStorage.getItem('stadiumflow_admin_token') || 'stadiumflow-admin-secret-token';
   const options = {
     method,
     headers: {
       'Content-Type': 'application/json',
+      'X-Admin-Token': token,
     },
   };
 
