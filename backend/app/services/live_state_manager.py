@@ -6,8 +6,9 @@ from backend.app.schemas.stadium import IncidentSchema
 
 class LiveStateManager:
     def __init__(self):
-        self.stadium_data_path = r"c:\Users\chait\Documents\HACKATHON\FIFA WORLD CUP\backend\app\data\stadium.json"
-        self.scenarios_data_path = r"c:\Users\chait\Documents\HACKATHON\FIFA WORLD CUP\backend\app\data\scenarios.json"
+        base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        self.stadium_data_path = os.path.join(base_dir, "data", "stadium.json")
+        self.scenarios_data_path = os.path.join(base_dir, "data", "scenarios.json")
         
         self.nodes = {}
         self.edges = []
