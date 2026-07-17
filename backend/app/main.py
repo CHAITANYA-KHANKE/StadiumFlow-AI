@@ -26,13 +26,15 @@ app = FastAPI(
 
 # CORS Setup
 origins = [o.strip() for o in settings.CORS_ORIGINS.split(",") if o.strip()]
+allow_all = "*" in origins or not origins
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins if origins else ["*"],
-    allow_credentials=True,
+    allow_credentials=not allow_all,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
 
 class ServerlessRateLimiter:
     def __init__(self):
