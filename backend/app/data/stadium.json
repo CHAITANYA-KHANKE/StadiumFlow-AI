@@ -1,0 +1,1114 @@
+{
+  "nodes": [
+    {
+      "id": "gate_a",
+      "name": "Gate A (North Entrance)",
+      "category": "gate",
+      "x": 40.0,
+      "y": 0.0,
+      "z": 0,
+      "accessible": true
+    },
+    {
+      "id": "gate_b",
+      "name": "Gate B (North-East Entrance)",
+      "category": "gate",
+      "x": 28.28,
+      "y": 28.28,
+      "z": 0,
+      "accessible": true
+    },
+    {
+      "id": "gate_c",
+      "name": "Gate C (East Entrance)",
+      "category": "gate",
+      "x": 0.0,
+      "y": 40.0,
+      "z": 0,
+      "accessible": true
+    },
+    {
+      "id": "gate_d",
+      "name": "Gate D (South-East Entrance)",
+      "category": "gate",
+      "x": -28.28,
+      "y": 28.28,
+      "z": 0,
+      "accessible": true
+    },
+    {
+      "id": "gate_e",
+      "name": "Gate E (South Entrance)",
+      "category": "gate",
+      "x": -40.0,
+      "y": 0.0,
+      "z": 0,
+      "accessible": true
+    },
+    {
+      "id": "gate_f",
+      "name": "Gate F (South-West Entrance)",
+      "category": "gate",
+      "x": -28.28,
+      "y": -28.28,
+      "z": 0,
+      "accessible": true
+    },
+    {
+      "id": "gate_g",
+      "name": "Gate G (West Entrance)",
+      "category": "gate",
+      "x": -0.0,
+      "y": -40.0,
+      "z": 0,
+      "accessible": true
+    },
+    {
+      "id": "gate_h",
+      "name": "Gate H (North-West Entrance)",
+      "category": "gate",
+      "x": 28.28,
+      "y": -28.28,
+      "z": 0,
+      "accessible": true
+    },
+    {
+      "id": "concourse_lower_0",
+      "name": "Lower Concourse Hub 0\u00b0",
+      "category": "concourse",
+      "x": 15.0,
+      "y": 0.0,
+      "z": 0,
+      "accessible": true
+    },
+    {
+      "id": "concourse_lower_45",
+      "name": "Lower Concourse Hub 45\u00b0",
+      "category": "concourse",
+      "x": 10.61,
+      "y": 10.61,
+      "z": 0,
+      "accessible": true
+    },
+    {
+      "id": "concourse_lower_90",
+      "name": "Lower Concourse Hub 90\u00b0",
+      "category": "concourse",
+      "x": 0.0,
+      "y": 15.0,
+      "z": 0,
+      "accessible": true
+    },
+    {
+      "id": "concourse_lower_135",
+      "name": "Lower Concourse Hub 135\u00b0",
+      "category": "concourse",
+      "x": -10.61,
+      "y": 10.61,
+      "z": 0,
+      "accessible": true
+    },
+    {
+      "id": "concourse_lower_180",
+      "name": "Lower Concourse Hub 180\u00b0",
+      "category": "concourse",
+      "x": -15.0,
+      "y": 0.0,
+      "z": 0,
+      "accessible": true
+    },
+    {
+      "id": "concourse_lower_225",
+      "name": "Lower Concourse Hub 225\u00b0",
+      "category": "concourse",
+      "x": -10.61,
+      "y": -10.61,
+      "z": 0,
+      "accessible": true
+    },
+    {
+      "id": "concourse_lower_270",
+      "name": "Lower Concourse Hub 270\u00b0",
+      "category": "concourse",
+      "x": -0.0,
+      "y": -15.0,
+      "z": 0,
+      "accessible": true
+    },
+    {
+      "id": "concourse_lower_315",
+      "name": "Lower Concourse Hub 315\u00b0",
+      "category": "concourse",
+      "x": 10.61,
+      "y": -10.61,
+      "z": 0,
+      "accessible": true
+    },
+    {
+      "id": "concourse_upper_0",
+      "name": "Upper Concourse Hub 0\u00b0",
+      "category": "concourse",
+      "x": 30.0,
+      "y": 0.0,
+      "z": 4,
+      "accessible": true
+    },
+    {
+      "id": "concourse_upper_45",
+      "name": "Upper Concourse Hub 45\u00b0",
+      "category": "concourse",
+      "x": 21.21,
+      "y": 21.21,
+      "z": 4,
+      "accessible": true
+    },
+    {
+      "id": "concourse_upper_90",
+      "name": "Upper Concourse Hub 90\u00b0",
+      "category": "concourse",
+      "x": 0.0,
+      "y": 30.0,
+      "z": 4,
+      "accessible": true
+    },
+    {
+      "id": "concourse_upper_135",
+      "name": "Upper Concourse Hub 135\u00b0",
+      "category": "concourse",
+      "x": -21.21,
+      "y": 21.21,
+      "z": 4,
+      "accessible": true
+    },
+    {
+      "id": "concourse_upper_180",
+      "name": "Upper Concourse Hub 180\u00b0",
+      "category": "concourse",
+      "x": -30.0,
+      "y": 0.0,
+      "z": 4,
+      "accessible": true
+    },
+    {
+      "id": "concourse_upper_225",
+      "name": "Upper Concourse Hub 225\u00b0",
+      "category": "concourse",
+      "x": -21.21,
+      "y": -21.21,
+      "z": 4,
+      "accessible": true
+    },
+    {
+      "id": "concourse_upper_270",
+      "name": "Upper Concourse Hub 270\u00b0",
+      "category": "concourse",
+      "x": -0.0,
+      "y": -30.0,
+      "z": 4,
+      "accessible": true
+    },
+    {
+      "id": "concourse_upper_315",
+      "name": "Upper Concourse Hub 315\u00b0",
+      "category": "concourse",
+      "x": 21.21,
+      "y": -21.21,
+      "z": 4,
+      "accessible": true
+    },
+    {
+      "id": "section_101",
+      "name": "Section 101",
+      "category": "section",
+      "x": 20.0,
+      "y": 0.0,
+      "z": 1,
+      "accessible": true
+    },
+    {
+      "id": "section_102",
+      "name": "Section 102",
+      "category": "section",
+      "x": 14.14,
+      "y": 14.14,
+      "z": 1,
+      "accessible": true
+    },
+    {
+      "id": "section_103",
+      "name": "Section 103",
+      "category": "section",
+      "x": 0.0,
+      "y": 20.0,
+      "z": 1,
+      "accessible": true
+    },
+    {
+      "id": "section_104",
+      "name": "Section 104",
+      "category": "section",
+      "x": -14.14,
+      "y": 14.14,
+      "z": 1,
+      "accessible": true
+    },
+    {
+      "id": "section_105",
+      "name": "Section 105",
+      "category": "section",
+      "x": -20.0,
+      "y": 0.0,
+      "z": 1,
+      "accessible": true
+    },
+    {
+      "id": "section_106",
+      "name": "Section 106",
+      "category": "section",
+      "x": -14.14,
+      "y": -14.14,
+      "z": 1,
+      "accessible": true
+    },
+    {
+      "id": "section_107",
+      "name": "Section 107",
+      "category": "section",
+      "x": -0.0,
+      "y": -20.0,
+      "z": 1,
+      "accessible": true
+    },
+    {
+      "id": "section_108",
+      "name": "Section 108",
+      "category": "section",
+      "x": 14.14,
+      "y": -14.14,
+      "z": 1,
+      "accessible": true
+    },
+    {
+      "id": "section_201",
+      "name": "Section 201",
+      "category": "section",
+      "x": 35.0,
+      "y": 0.0,
+      "z": 4.5,
+      "accessible": true
+    },
+    {
+      "id": "section_202",
+      "name": "Section 202",
+      "category": "section",
+      "x": 24.75,
+      "y": 24.75,
+      "z": 4.5,
+      "accessible": true
+    },
+    {
+      "id": "section_203",
+      "name": "Section 203",
+      "category": "section",
+      "x": 0.0,
+      "y": 35.0,
+      "z": 4.5,
+      "accessible": true
+    },
+    {
+      "id": "section_204",
+      "name": "Section 204",
+      "category": "section",
+      "x": -24.75,
+      "y": 24.75,
+      "z": 4.5,
+      "accessible": true
+    },
+    {
+      "id": "section_205",
+      "name": "Section 205",
+      "category": "section",
+      "x": -35.0,
+      "y": 0.0,
+      "z": 4.5,
+      "accessible": true
+    },
+    {
+      "id": "section_206",
+      "name": "Section 206",
+      "category": "section",
+      "x": -24.75,
+      "y": -24.75,
+      "z": 4.5,
+      "accessible": true
+    },
+    {
+      "id": "section_207",
+      "name": "Section 207",
+      "category": "section",
+      "x": -0.0,
+      "y": -35.0,
+      "z": 4.5,
+      "accessible": true
+    },
+    {
+      "id": "section_208",
+      "name": "Section 208",
+      "category": "section",
+      "x": 24.75,
+      "y": -24.75,
+      "z": 4.5,
+      "accessible": true
+    },
+    {
+      "id": "restroom_l1",
+      "name": "Restroom L1 (Lower North)",
+      "category": "restroom",
+      "x": 13.86,
+      "y": 5.74,
+      "z": 0,
+      "accessible": true
+    },
+    {
+      "id": "restroom_l2",
+      "name": "Restroom L2 (Lower East)",
+      "category": "restroom",
+      "x": -5.74,
+      "y": 13.86,
+      "z": 0,
+      "accessible": true
+    },
+    {
+      "id": "restroom_l3",
+      "name": "Restroom L3 (Lower South)",
+      "category": "restroom",
+      "x": -13.86,
+      "y": -5.74,
+      "z": 0,
+      "accessible": true
+    },
+    {
+      "id": "restroom_l4",
+      "name": "Restroom L4 (Lower West)",
+      "category": "restroom",
+      "x": 5.74,
+      "y": -13.86,
+      "z": 0,
+      "accessible": true
+    },
+    {
+      "id": "restroom_u1",
+      "name": "Restroom U1 (Upper North-East)",
+      "category": "restroom",
+      "x": 21.21,
+      "y": 21.21,
+      "z": 4,
+      "accessible": true
+    },
+    {
+      "id": "restroom_u2",
+      "name": "Restroom U2 (Upper South-West)",
+      "category": "restroom",
+      "x": -21.21,
+      "y": -21.21,
+      "z": 4,
+      "accessible": true
+    },
+    {
+      "id": "food_l1",
+      "name": "Snack Bar L1 (Lower North-West)",
+      "category": "food",
+      "x": 13.86,
+      "y": -5.74,
+      "z": 0,
+      "accessible": true
+    },
+    {
+      "id": "food_l2",
+      "name": "Beer & Burger L2 (Lower North-East)",
+      "category": "food",
+      "x": 5.74,
+      "y": 13.86,
+      "z": 0,
+      "accessible": true
+    },
+    {
+      "id": "food_l3",
+      "name": "Pizza L3 (Lower South-East)",
+      "category": "food",
+      "x": -13.86,
+      "y": 5.74,
+      "z": 0,
+      "accessible": true
+    },
+    {
+      "id": "food_l4",
+      "name": "Snack Bar L4 (Lower South-West)",
+      "category": "food",
+      "x": -5.74,
+      "y": -13.86,
+      "z": 0,
+      "accessible": true
+    },
+    {
+      "id": "food_u1",
+      "name": "Arena Grill U1 (Upper South-East)",
+      "category": "food",
+      "x": -21.21,
+      "y": 21.21,
+      "z": 4,
+      "accessible": true
+    },
+    {
+      "id": "food_u2",
+      "name": "Sports Bar U2 (Upper North-West)",
+      "category": "food",
+      "x": 21.21,
+      "y": -21.21,
+      "z": 4,
+      "accessible": true
+    },
+    {
+      "id": "medical_l1",
+      "name": "Medical Point L1 (Lower East)",
+      "category": "medical",
+      "x": 0.0,
+      "y": 15.0,
+      "z": 0,
+      "accessible": true
+    },
+    {
+      "id": "medical_u1",
+      "name": "Medical Point U1 (Upper West)",
+      "category": "medical",
+      "x": -0.0,
+      "y": -30.0,
+      "z": 4,
+      "accessible": true
+    },
+    {
+      "id": "info_l1",
+      "name": "Information Desk L1 (Lower North)",
+      "category": "info",
+      "x": 15.0,
+      "y": 0.0,
+      "z": 0,
+      "accessible": true
+    },
+    {
+      "id": "info_u1",
+      "name": "Information Desk U1 (Upper South)",
+      "category": "info",
+      "x": -30.0,
+      "y": 0.0,
+      "z": 4,
+      "accessible": true
+    },
+    {
+      "id": "stairs_north_bottom",
+      "name": "Stairs North (Ground)",
+      "category": "concourse",
+      "x": 22.5,
+      "y": 0.0,
+      "z": 0,
+      "accessible": false
+    },
+    {
+      "id": "stairs_north_top",
+      "name": "Stairs North (Upper)",
+      "category": "concourse",
+      "x": 22.5,
+      "y": 0.0,
+      "z": 4,
+      "accessible": false
+    },
+    {
+      "id": "stairs_south_bottom",
+      "name": "Stairs South (Ground)",
+      "category": "concourse",
+      "x": -22.5,
+      "y": 0.0,
+      "z": 0,
+      "accessible": false
+    },
+    {
+      "id": "stairs_south_top",
+      "name": "Stairs South (Upper)",
+      "category": "concourse",
+      "x": -22.5,
+      "y": 0.0,
+      "z": 4,
+      "accessible": false
+    },
+    {
+      "id": "elevator_east_bottom",
+      "name": "Elevator East (Ground)",
+      "category": "concourse",
+      "x": 0.0,
+      "y": 22.5,
+      "z": 0,
+      "accessible": true
+    },
+    {
+      "id": "elevator_east_top",
+      "name": "Elevator East (Upper)",
+      "category": "concourse",
+      "x": 0.0,
+      "y": 22.5,
+      "z": 4,
+      "accessible": true
+    },
+    {
+      "id": "elevator_west_bottom",
+      "name": "Elevator West (Ground)",
+      "category": "concourse",
+      "x": -0.0,
+      "y": -22.5,
+      "z": 0,
+      "accessible": true
+    },
+    {
+      "id": "elevator_west_top",
+      "name": "Elevator West (Upper)",
+      "category": "concourse",
+      "x": -0.0,
+      "y": -22.5,
+      "z": 4,
+      "accessible": true
+    }
+  ],
+  "edges": [
+    {
+      "source": "gate_a",
+      "destination": "concourse_lower_0",
+      "distance": 25.0,
+      "accessible": true,
+      "status": "open"
+    },
+    {
+      "source": "gate_b",
+      "destination": "concourse_lower_45",
+      "distance": 24.99,
+      "accessible": true,
+      "status": "open"
+    },
+    {
+      "source": "gate_c",
+      "destination": "concourse_lower_90",
+      "distance": 25.0,
+      "accessible": true,
+      "status": "open"
+    },
+    {
+      "source": "gate_d",
+      "destination": "concourse_lower_135",
+      "distance": 24.99,
+      "accessible": true,
+      "status": "open"
+    },
+    {
+      "source": "gate_e",
+      "destination": "concourse_lower_180",
+      "distance": 25.0,
+      "accessible": true,
+      "status": "open"
+    },
+    {
+      "source": "gate_f",
+      "destination": "concourse_lower_225",
+      "distance": 24.99,
+      "accessible": true,
+      "status": "open"
+    },
+    {
+      "source": "gate_g",
+      "destination": "concourse_lower_270",
+      "distance": 25.0,
+      "accessible": true,
+      "status": "open"
+    },
+    {
+      "source": "gate_h",
+      "destination": "concourse_lower_315",
+      "distance": 24.99,
+      "accessible": true,
+      "status": "open"
+    },
+    {
+      "source": "concourse_lower_0",
+      "destination": "concourse_lower_45",
+      "distance": 11.48,
+      "accessible": true,
+      "status": "open"
+    },
+    {
+      "source": "concourse_lower_45",
+      "destination": "concourse_lower_90",
+      "distance": 11.48,
+      "accessible": true,
+      "status": "open"
+    },
+    {
+      "source": "concourse_lower_90",
+      "destination": "concourse_lower_135",
+      "distance": 11.48,
+      "accessible": true,
+      "status": "open"
+    },
+    {
+      "source": "concourse_lower_135",
+      "destination": "concourse_lower_180",
+      "distance": 11.48,
+      "accessible": true,
+      "status": "open"
+    },
+    {
+      "source": "concourse_lower_180",
+      "destination": "concourse_lower_225",
+      "distance": 11.48,
+      "accessible": true,
+      "status": "open"
+    },
+    {
+      "source": "concourse_lower_225",
+      "destination": "concourse_lower_270",
+      "distance": 11.48,
+      "accessible": true,
+      "status": "open"
+    },
+    {
+      "source": "concourse_lower_270",
+      "destination": "concourse_lower_315",
+      "distance": 11.48,
+      "accessible": true,
+      "status": "open"
+    },
+    {
+      "source": "concourse_lower_315",
+      "destination": "concourse_lower_0",
+      "distance": 11.48,
+      "accessible": true,
+      "status": "open"
+    },
+    {
+      "source": "concourse_upper_0",
+      "destination": "concourse_upper_45",
+      "distance": 22.96,
+      "accessible": true,
+      "status": "open"
+    },
+    {
+      "source": "concourse_upper_45",
+      "destination": "concourse_upper_90",
+      "distance": 22.96,
+      "accessible": true,
+      "status": "open"
+    },
+    {
+      "source": "concourse_upper_90",
+      "destination": "concourse_upper_135",
+      "distance": 22.96,
+      "accessible": true,
+      "status": "open"
+    },
+    {
+      "source": "concourse_upper_135",
+      "destination": "concourse_upper_180",
+      "distance": 22.96,
+      "accessible": true,
+      "status": "open"
+    },
+    {
+      "source": "concourse_upper_180",
+      "destination": "concourse_upper_225",
+      "distance": 22.96,
+      "accessible": true,
+      "status": "open"
+    },
+    {
+      "source": "concourse_upper_225",
+      "destination": "concourse_upper_270",
+      "distance": 22.96,
+      "accessible": true,
+      "status": "open"
+    },
+    {
+      "source": "concourse_upper_270",
+      "destination": "concourse_upper_315",
+      "distance": 22.96,
+      "accessible": true,
+      "status": "open"
+    },
+    {
+      "source": "concourse_upper_315",
+      "destination": "concourse_upper_0",
+      "distance": 22.96,
+      "accessible": true,
+      "status": "open"
+    },
+    {
+      "source": "concourse_lower_0",
+      "destination": "section_101",
+      "distance": 5.1,
+      "accessible": true,
+      "status": "open"
+    },
+    {
+      "source": "concourse_lower_45",
+      "destination": "section_102",
+      "distance": 5.09,
+      "accessible": true,
+      "status": "open"
+    },
+    {
+      "source": "concourse_lower_90",
+      "destination": "section_103",
+      "distance": 5.1,
+      "accessible": true,
+      "status": "open"
+    },
+    {
+      "source": "concourse_lower_135",
+      "destination": "section_104",
+      "distance": 5.09,
+      "accessible": true,
+      "status": "open"
+    },
+    {
+      "source": "concourse_lower_180",
+      "destination": "section_105",
+      "distance": 5.1,
+      "accessible": true,
+      "status": "open"
+    },
+    {
+      "source": "concourse_lower_225",
+      "destination": "section_106",
+      "distance": 5.09,
+      "accessible": true,
+      "status": "open"
+    },
+    {
+      "source": "concourse_lower_270",
+      "destination": "section_107",
+      "distance": 5.1,
+      "accessible": true,
+      "status": "open"
+    },
+    {
+      "source": "concourse_lower_315",
+      "destination": "section_108",
+      "distance": 5.09,
+      "accessible": true,
+      "status": "open"
+    },
+    {
+      "source": "concourse_upper_0",
+      "destination": "section_201",
+      "distance": 5.02,
+      "accessible": true,
+      "status": "open"
+    },
+    {
+      "source": "concourse_upper_45",
+      "destination": "section_202",
+      "distance": 5.03,
+      "accessible": true,
+      "status": "open"
+    },
+    {
+      "source": "concourse_upper_90",
+      "destination": "section_203",
+      "distance": 5.02,
+      "accessible": true,
+      "status": "open"
+    },
+    {
+      "source": "concourse_upper_135",
+      "destination": "section_204",
+      "distance": 5.03,
+      "accessible": true,
+      "status": "open"
+    },
+    {
+      "source": "concourse_upper_180",
+      "destination": "section_205",
+      "distance": 5.02,
+      "accessible": true,
+      "status": "open"
+    },
+    {
+      "source": "concourse_upper_225",
+      "destination": "section_206",
+      "distance": 5.03,
+      "accessible": true,
+      "status": "open"
+    },
+    {
+      "source": "concourse_upper_270",
+      "destination": "section_207",
+      "distance": 5.02,
+      "accessible": true,
+      "status": "open"
+    },
+    {
+      "source": "concourse_upper_315",
+      "destination": "section_208",
+      "distance": 5.03,
+      "accessible": true,
+      "status": "open"
+    },
+    {
+      "source": "stairs_north_bottom",
+      "destination": "stairs_north_top",
+      "distance": 10.0,
+      "accessible": false,
+      "status": "open"
+    },
+    {
+      "source": "concourse_lower_0",
+      "destination": "stairs_north_bottom",
+      "distance": 7.5,
+      "accessible": false,
+      "status": "open"
+    },
+    {
+      "source": "concourse_upper_0",
+      "destination": "stairs_north_top",
+      "distance": 7.5,
+      "accessible": false,
+      "status": "open"
+    },
+    {
+      "source": "stairs_south_bottom",
+      "destination": "stairs_south_top",
+      "distance": 10.0,
+      "accessible": false,
+      "status": "open"
+    },
+    {
+      "source": "concourse_lower_180",
+      "destination": "stairs_south_bottom",
+      "distance": 7.5,
+      "accessible": false,
+      "status": "open"
+    },
+    {
+      "source": "concourse_upper_180",
+      "destination": "stairs_south_top",
+      "distance": 7.5,
+      "accessible": false,
+      "status": "open"
+    },
+    {
+      "source": "elevator_east_bottom",
+      "destination": "elevator_east_top",
+      "distance": 6.0,
+      "accessible": true,
+      "status": "open"
+    },
+    {
+      "source": "concourse_lower_90",
+      "destination": "elevator_east_bottom",
+      "distance": 7.5,
+      "accessible": true,
+      "status": "open"
+    },
+    {
+      "source": "concourse_upper_90",
+      "destination": "elevator_east_top",
+      "distance": 7.5,
+      "accessible": true,
+      "status": "open"
+    },
+    {
+      "source": "elevator_west_bottom",
+      "destination": "elevator_west_top",
+      "distance": 6.0,
+      "accessible": true,
+      "status": "open"
+    },
+    {
+      "source": "concourse_lower_270",
+      "destination": "elevator_west_bottom",
+      "distance": 7.5,
+      "accessible": true,
+      "status": "open"
+    },
+    {
+      "source": "concourse_upper_270",
+      "destination": "elevator_west_top",
+      "distance": 7.5,
+      "accessible": true,
+      "status": "open"
+    },
+    {
+      "source": "concourse_lower_0",
+      "destination": "restroom_l1",
+      "distance": 5.85,
+      "accessible": true,
+      "status": "open"
+    },
+    {
+      "source": "concourse_lower_45",
+      "destination": "restroom_l1",
+      "distance": 5.85,
+      "accessible": true,
+      "status": "open"
+    },
+    {
+      "source": "concourse_lower_90",
+      "destination": "restroom_l2",
+      "distance": 5.85,
+      "accessible": true,
+      "status": "open"
+    },
+    {
+      "source": "concourse_lower_135",
+      "destination": "restroom_l2",
+      "distance": 5.85,
+      "accessible": true,
+      "status": "open"
+    },
+    {
+      "source": "concourse_lower_180",
+      "destination": "restroom_l3",
+      "distance": 5.85,
+      "accessible": true,
+      "status": "open"
+    },
+    {
+      "source": "concourse_lower_225",
+      "destination": "restroom_l3",
+      "distance": 5.85,
+      "accessible": true,
+      "status": "open"
+    },
+    {
+      "source": "concourse_lower_270",
+      "destination": "restroom_l4",
+      "distance": 5.85,
+      "accessible": true,
+      "status": "open"
+    },
+    {
+      "source": "concourse_lower_315",
+      "destination": "restroom_l4",
+      "distance": 5.85,
+      "accessible": true,
+      "status": "open"
+    },
+    {
+      "source": "concourse_upper_45",
+      "destination": "restroom_u1",
+      "distance": 0.0,
+      "accessible": true,
+      "status": "open"
+    },
+    {
+      "source": "concourse_upper_225",
+      "destination": "restroom_u2",
+      "distance": 0.0,
+      "accessible": true,
+      "status": "open"
+    },
+    {
+      "source": "concourse_lower_0",
+      "destination": "food_l1",
+      "distance": 5.85,
+      "accessible": true,
+      "status": "open"
+    },
+    {
+      "source": "concourse_lower_315",
+      "destination": "food_l1",
+      "distance": 5.85,
+      "accessible": true,
+      "status": "open"
+    },
+    {
+      "source": "concourse_lower_45",
+      "destination": "food_l2",
+      "distance": 5.85,
+      "accessible": true,
+      "status": "open"
+    },
+    {
+      "source": "concourse_lower_90",
+      "destination": "food_l2",
+      "distance": 5.85,
+      "accessible": true,
+      "status": "open"
+    },
+    {
+      "source": "concourse_lower_135",
+      "destination": "food_l3",
+      "distance": 5.85,
+      "accessible": true,
+      "status": "open"
+    },
+    {
+      "source": "concourse_lower_180",
+      "destination": "food_l3",
+      "distance": 5.85,
+      "accessible": true,
+      "status": "open"
+    },
+    {
+      "source": "concourse_lower_225",
+      "destination": "food_l4",
+      "distance": 5.85,
+      "accessible": true,
+      "status": "open"
+    },
+    {
+      "source": "concourse_lower_270",
+      "destination": "food_l4",
+      "distance": 5.85,
+      "accessible": true,
+      "status": "open"
+    },
+    {
+      "source": "concourse_upper_135",
+      "destination": "food_u1",
+      "distance": 0.0,
+      "accessible": true,
+      "status": "open"
+    },
+    {
+      "source": "concourse_upper_315",
+      "destination": "food_u2",
+      "distance": 0.0,
+      "accessible": true,
+      "status": "open"
+    },
+    {
+      "source": "concourse_lower_90",
+      "destination": "medical_l1",
+      "distance": 0.0,
+      "accessible": true,
+      "status": "open"
+    },
+    {
+      "source": "concourse_upper_270",
+      "destination": "medical_u1",
+      "distance": 0.0,
+      "accessible": true,
+      "status": "open"
+    },
+    {
+      "source": "concourse_lower_0",
+      "destination": "info_l1",
+      "distance": 0.0,
+      "accessible": true,
+      "status": "open"
+    },
+    {
+      "source": "concourse_upper_180",
+      "destination": "info_u1",
+      "distance": 0.0,
+      "accessible": true,
+      "status": "open"
+    }
+  ]
+}

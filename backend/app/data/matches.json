@@ -1,0 +1,72 @@
+[
+  {
+    "id": "match_1",
+    "stage": "Quarterfinals",
+    "home_team": "Spain",
+    "away_team": "Germany",
+    "home_score": 2,
+    "away_score": 1,
+    "status": "completed",
+    "datetime": "2026-07-15T18:00:00",
+    "events": [
+      {"time": "24'", "player": "Morata", "type": "goal", "detail": "Field Goal"},
+      {"time": "68'", "player": "Wirtz", "type": "goal", "detail": "Field Goal"},
+      {"time": "119'", "player": "Merino", "type": "goal", "detail": "Header"}
+    ]
+  },
+  {
+    "id": "match_2",
+    "stage": "Quarterfinals",
+    "home_team": "France",
+    "away_team": "Portugal",
+    "home_score": 3,
+    "away_score": 2,
+    "status": "completed",
+    "datetime": "2026-07-16T21:00:00",
+    "events": [
+      {"time": "12'", "player": "Mbappé", "type": "goal", "detail": "Penalty"},
+      {"time": "44'", "player": "Ronaldo", "type": "goal", "detail": "Free Kick"},
+      {"time": "89'", "player": "Griezmann", "type": "goal", "detail": "Field Goal"}
+    ]
+  },
+  {
+    "id": "match_3",
+    "stage": "Semifinals",
+    "home_team": "Argentina",
+    "away_team": "Croatia",
+    "home_score": 0,
+    "away_score": 0,
+    "status": "upcoming",
+    "datetime": "2026-07-18T20:00:00",
+    "events": []
+  },
+  {
+    "id": "match_4",
+    "stage": "Semifinals",
+    "home_team": "France",
+    "away_team": "Spain",
+    "home_score": 0,
+    "away_score": 0,
+    "status": "upcoming",
+    "datetime": "2026-07-19T20:00:00",
+    "events": []
+  },
+  {
+    "id": "bracket_structure",
+    "bracket": {
+      "quarterfinals": [
+        { "id": "q1", "team1": "Spain", "score1": 2, "team2": "Germany", "score2": 1, "winner": "Spain" },
+        { "id": "q2", "team1": "France", "score1": 3, "team2": "Portugal", "score2": 2, "winner": "France" },
+        { "id": "q3", "team1": "Argentina", "score1": 1, "team2": "Netherlands", "score2": 0, "winner": "Argentina" },
+        { "id": "q4", "team1": "Croatia", "score1": 1, "score1_pen": 4, "team2": "Brazil", "score2": 1, "score2_pen": 2, "winner": "Croatia" }
+      ],
+      "semifinals": [
+        { "id": "s1", "team1": "Argentina", "score1": "", "team2": "Croatia", "score2": "", "winner": "" },
+        { "id": "s2", "team1": "France", "score1": "", "team2": "Spain", "score2": "", "winner": "" }
+      ],
+      "final": [
+        { "id": "f1", "team1": "Winner SF1", "score1": "", "team2": "Winner SF2", "score2": "", "winner": "", "detail": "Final scheduled for July 26, 2026 at MetLife Stadium" }
+      ]
+    }
+  }
+]

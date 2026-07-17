@@ -1,0 +1,723 @@
+[
+  {
+    "id": "player_messi",
+    "name": "Lionel Messi",
+    "team": "Argentina",
+    "position": "Forward / Playmaker",
+    "status": "Starting XI",
+    "fitness": "Fit (100%)",
+    "rating": 92,
+    "photo_placeholder": "LM10",
+    "stats": {
+      "goals": 5,
+      "assists": 3,
+      "pass_accuracy": "89%",
+      "shots_on_target": 14,
+      "distance_run": "8.4 km/match"
+    },
+    "radar": {
+      "pace": 80,
+      "shooting": 90,
+      "passing": 94,
+      "dribbling": 95,
+      "defending": 35,
+      "physicality": 68
+    },
+    "achievements": [
+      "FIFA World Cup Golden Ball Contender",
+      "Most Key Passes in Final Third (24)",
+      "Top Goalscorer for Argentina (5 Goals)",
+      "Man of the Match in 3 Bracket Games"
+    ]
+  },
+  {
+    "id": "player_alvarez",
+    "name": "Julián Álvarez",
+    "team": "Argentina",
+    "position": "Forward",
+    "status": "Starting XI",
+    "fitness": "Fit (100%)",
+    "rating": 85,
+    "photo_placeholder": "JA9",
+    "stats": {
+      "goals": 3,
+      "assists": 1,
+      "pass_accuracy": "82%",
+      "shots_on_target": 8,
+      "distance_run": "10.1 km/match"
+    },
+    "radar": {
+      "pace": 84,
+      "shooting": 82,
+      "passing": 76,
+      "dribbling": 80,
+      "defending": 45,
+      "physicality": 76
+    },
+    "achievements": [
+      "Key link-up play in knockout games",
+      "Scored decisive goal in Quarterfinals",
+      "Highest defensive pressure among forwards"
+    ]
+  },
+  {
+    "id": "player_macallister",
+    "name": "Alexis Mac Allister",
+    "team": "Argentina",
+    "position": "Midfielder",
+    "status": "Starting XI",
+    "fitness": "Fit (100%)",
+    "rating": 86,
+    "photo_placeholder": "AM20",
+    "stats": {
+      "goals": 1,
+      "assists": 2,
+      "pass_accuracy": "90%",
+      "shots_on_target": 4,
+      "distance_run": "10.8 km/match"
+    },
+    "radar": {
+      "pace": 74,
+      "shooting": 78,
+      "passing": 87,
+      "dribbling": 83,
+      "defending": 72,
+      "physicality": 78
+    },
+    "achievements": [
+      "Argentina Midfield Engine",
+      "Created 12 key scoring chances",
+      "High duel win rate in center (64%)"
+    ]
+  },
+  {
+    "id": "player_mbappe",
+    "name": "Kylian Mbappé",
+    "team": "France",
+    "position": "Left Winger / Forward",
+    "status": "Starting XI",
+    "fitness": "Fit (100%)",
+    "rating": 91,
+    "photo_placeholder": "KM7",
+    "stats": {
+      "goals": 6,
+      "assists": 2,
+      "pass_accuracy": "82%",
+      "shots_on_target": 18,
+      "distance_run": "9.8 km/match"
+    },
+    "radar": {
+      "pace": 97,
+      "shooting": 89,
+      "passing": 80,
+      "dribbling": 92,
+      "defending": 36,
+      "physicality": 78
+    },
+    "achievements": [
+      "Tournament Golden Boot Leader (6 Goals)",
+      "Highest Recorded Sprint Speed (35.6 km/h)",
+      "Most Successful Dribbles in Left Zone (28)"
+    ]
+  },
+  {
+    "id": "player_griezmann",
+    "name": "Antoine Griezmann",
+    "team": "France",
+    "position": "Midfielder / Forward",
+    "status": "Starting XI",
+    "fitness": "Fit (100%)",
+    "rating": 88,
+    "photo_placeholder": "AG7",
+    "stats": {
+      "goals": 2,
+      "assists": 4,
+      "pass_accuracy": "86%",
+      "shots_on_target": 7,
+      "distance_run": "10.4 km/match"
+    },
+    "radar": {
+      "pace": 78,
+      "shooting": 82,
+      "passing": 89,
+      "dribbling": 86,
+      "defending": 52,
+      "physicality": 70
+    },
+    "achievements": [
+      "France Playmaker & Tactician",
+      "Most assists for France (4)",
+      "Man of the Match in Quarterfinals vs Portugal"
+    ]
+  },
+  {
+    "id": "player_giroud",
+    "name": "Olivier Giroud",
+    "team": "France",
+    "position": "Forward",
+    "status": "Bench / Impact Sub",
+    "fitness": "Fit (100%)",
+    "rating": 82,
+    "photo_placeholder": "OG9",
+    "stats": {
+      "goals": 2,
+      "assists": 0,
+      "pass_accuracy": "74%",
+      "shots_on_target": 6,
+      "distance_run": "6.2 km/match"
+    },
+    "radar": {
+      "pace": 52,
+      "shooting": 80,
+      "passing": 70,
+      "dribbling": 68,
+      "defending": 38,
+      "physicality": 83
+    },
+    "achievements": [
+      "France's All-Time Top Goalscorer",
+      "Dangerous aerial target man",
+      "Scored crucial late headers"
+    ]
+  },
+  {
+    "id": "player_pedri",
+    "name": "Pedri",
+    "team": "Spain",
+    "position": "Central Midfielder",
+    "status": "Starting XI",
+    "fitness": "Slight Discomfort (85%)",
+    "rating": 86,
+    "photo_placeholder": "P8",
+    "stats": {
+      "goals": 1,
+      "assists": 4,
+      "pass_accuracy": "93%",
+      "shots_on_target": 5,
+      "distance_run": "11.2 km/match"
+    },
+    "radar": {
+      "pace": 76,
+      "shooting": 72,
+      "passing": 88,
+      "dribbling": 87,
+      "defending": 68,
+      "physicality": 72
+    },
+    "achievements": [
+      "Highest Pass Accuracy in Midfield (93%)",
+      "Most Distance Covered in Play (11.2 km/match)",
+      "U-21 Player of the Tournament Nominee"
+    ]
+  },
+  {
+    "id": "player_yamal",
+    "name": "Lamine Yamal",
+    "team": "Spain",
+    "position": "Right Winger",
+    "status": "Starting XI",
+    "fitness": "Fit (100%)",
+    "rating": 86,
+    "photo_placeholder": "LY19",
+    "stats": {
+      "goals": 2,
+      "assists": 3,
+      "pass_accuracy": "85%",
+      "shots_on_target": 9,
+      "distance_run": "9.4 km/match"
+    },
+    "radar": {
+      "pace": 92,
+      "shooting": 80,
+      "passing": 84,
+      "dribbling": 91,
+      "defending": 30,
+      "physicality": 62
+    },
+    "achievements": [
+      "Youngest goalscorer in European/WC history",
+      "Most dribbles completed in right wing (32)",
+      "Key assist in Spain vs Germany match"
+    ]
+  },
+  {
+    "id": "player_rodri",
+    "name": "Rodri",
+    "team": "Spain",
+    "position": "Defensive Midfielder",
+    "status": "Starting XI",
+    "fitness": "Fit (100%)",
+    "rating": 90,
+    "photo_placeholder": "R16",
+    "stats": {
+      "goals": 1,
+      "assists": 2,
+      "pass_accuracy": "95%",
+      "shots_on_target": 3,
+      "distance_run": "11.5 km/match"
+    },
+    "radar": {
+      "pace": 70,
+      "shooting": 75,
+      "passing": 92,
+      "dribbling": 82,
+      "defending": 89,
+      "physicality": 85
+    },
+    "achievements": [
+      "Spain Midfield Anchor",
+      "Highest pass completion rate (95%)",
+      "Most ball recoveries in final third (18)"
+    ]
+  },
+  {
+    "id": "player_ronaldo",
+    "name": "Cristiano Ronaldo",
+    "team": "Portugal",
+    "position": "Forward",
+    "status": "Starting XI",
+    "fitness": "Fit (100%)",
+    "rating": 89,
+    "photo_placeholder": "CR7",
+    "stats": {
+      "goals": 4,
+      "assists": 1,
+      "pass_accuracy": "83%",
+      "shots_on_target": 12,
+      "distance_run": "8.2 km/match"
+    },
+    "radar": {
+      "pace": 79,
+      "shooting": 88,
+      "passing": 78,
+      "dribbling": 80,
+      "defending": 28,
+      "physicality": 75
+    },
+    "achievements": [
+      "Portugal Captain & Legend",
+      "Most international goals scorer",
+      "Match-winning free-kick vs France"
+    ]
+  },
+  {
+    "id": "player_fernandes",
+    "name": "Bruno Fernandes",
+    "team": "Portugal",
+    "position": "Attacking Midfielder",
+    "status": "Starting XI",
+    "fitness": "Fit (100%)",
+    "rating": 88,
+    "photo_placeholder": "BF8",
+    "stats": {
+      "goals": 2,
+      "assists": 3,
+      "pass_accuracy": "87%",
+      "shots_on_target": 8,
+      "distance_run": "10.6 km/match"
+    },
+    "radar": {
+      "pace": 76,
+      "shooting": 84,
+      "passing": 90,
+      "dribbling": 83,
+      "defending": 60,
+      "physicality": 74
+    },
+    "achievements": [
+      "Portugal Key Creator",
+      "Most key passes in tournament (19)",
+      "Completed 85% passes under high pressure"
+    ]
+  },
+  {
+    "id": "player_bsilva",
+    "name": "Bernardo Silva",
+    "team": "Portugal",
+    "position": "Midfielder / Winger",
+    "status": "Starting XI",
+    "fitness": "Fit (100%)",
+    "rating": 87,
+    "photo_placeholder": "BS10",
+    "stats": {
+      "goals": 1,
+      "assists": 2,
+      "pass_accuracy": "91%",
+      "shots_on_target": 4,
+      "distance_run": "11.1 km/match"
+    },
+    "radar": {
+      "pace": 72,
+      "shooting": 76,
+      "passing": 89,
+      "dribbling": 92,
+      "defending": 65,
+      "physicality": 68
+    },
+    "achievements": [
+      "Exceptional workrate & tactical awareness",
+      "Most progressive distance carried",
+      "Assisted equalizer in Quarterfinals"
+    ]
+  },
+  {
+    "id": "player_musiala",
+    "name": "Jamal Musiala",
+    "team": "Germany",
+    "position": "Attacking Midfielder",
+    "status": "Starting XI",
+    "fitness": "Fit (100%)",
+    "rating": 88,
+    "photo_placeholder": "JM10",
+    "stats": {
+      "goals": 3,
+      "assists": 2,
+      "pass_accuracy": "89%",
+      "shots_on_target": 10,
+      "distance_run": "9.8 km/match"
+    },
+    "radar": {
+      "pace": 85,
+      "shooting": 80,
+      "passing": 85,
+      "dribbling": 94,
+      "defending": 42,
+      "physicality": 64
+    },
+    "achievements": [
+      "Germany Creative Hub",
+      "Most successful take-ons in group stage (21)",
+      "Scored twice in opening stage"
+    ]
+  },
+  {
+    "id": "player_wirtz",
+    "name": "Florian Wirtz",
+    "team": "Germany",
+    "position": "Attacking Midfielder",
+    "status": "Starting XI",
+    "fitness": "Fit (100%)",
+    "rating": 87,
+    "photo_placeholder": "FW10",
+    "stats": {
+      "goals": 2,
+      "assists": 3,
+      "pass_accuracy": "88%",
+      "shots_on_target": 8,
+      "distance_run": "10.2 km/match"
+    },
+    "radar": {
+      "pace": 82,
+      "shooting": 78,
+      "passing": 89,
+      "dribbling": 90,
+      "defending": 48,
+      "physicality": 66
+    },
+    "achievements": [
+      "Scored equalising goal vs Spain",
+      "Co-creator of German midfield engine",
+      "Created 5 clear cut chances in final third"
+    ]
+  },
+  {
+    "id": "player_gundogan",
+    "name": "İlkay Gündoğan",
+    "team": "Germany",
+    "position": "Midfielder",
+    "status": "Starting XI",
+    "fitness": "Fit (100%)",
+    "rating": 85,
+    "photo_placeholder": "IG22",
+    "stats": {
+      "goals": 1,
+      "assists": 2,
+      "pass_accuracy": "91%",
+      "shots_on_target": 4,
+      "distance_run": "10.0 km/match"
+    },
+    "radar": {
+      "pace": 64,
+      "shooting": 80,
+      "passing": 88,
+      "dribbling": 84,
+      "defending": 72,
+      "physicality": 72
+    },
+    "achievements": [
+      "Germany Midfield Conductor",
+      "Maintained 91% passing consistency",
+      "Leader in transitions and key headers"
+    ]
+  },
+  {
+    "id": "player_modric",
+    "name": "Luka Modrić",
+    "team": "Croatia",
+    "position": "Central Midfielder",
+    "status": "Starting XI",
+    "fitness": "Fit (100%)",
+    "rating": 87,
+    "photo_placeholder": "LM10",
+    "stats": {
+      "goals": 1,
+      "assists": 2,
+      "pass_accuracy": "92%",
+      "shots_on_target": 4,
+      "distance_run": "9.5 km/match"
+    },
+    "radar": {
+      "pace": 68,
+      "shooting": 76,
+      "passing": 91,
+      "dribbling": 88,
+      "defending": 66,
+      "physicality": 68
+    },
+    "achievements": [
+      "Croatia Captain & Veteran leader",
+      "Led Croatia to consecutive semifinals",
+      "Highest pass rate under pressure (91%)"
+    ]
+  },
+  {
+    "id": "player_kovacic",
+    "name": "Mateo Kovačić",
+    "team": "Croatia",
+    "position": "Midfielder",
+    "status": "Starting XI",
+    "fitness": "Fit (100%)",
+    "rating": 84,
+    "photo_placeholder": "MK8",
+    "stats": {
+      "goals": 0,
+      "assists": 2,
+      "pass_accuracy": "91%",
+      "shots_on_target": 3,
+      "distance_run": "10.9 km/match"
+    },
+    "radar": {
+      "pace": 78,
+      "shooting": 68,
+      "passing": 85,
+      "dribbling": 87,
+      "defending": 74,
+      "physicality": 80
+    },
+    "achievements": [
+      "Croatia Midfield Press Breaker",
+      "Most ball carries through middle third (24)",
+      "Solid defensive contributions in penalty area"
+    ]
+  },
+  {
+    "id": "player_perisic",
+    "name": "Ivan Perišić",
+    "team": "Croatia",
+    "position": "Midfielder / Winger",
+    "status": "Starting XI",
+    "fitness": "Slight Discomfort (80%)",
+    "rating": 80,
+    "photo_placeholder": "IP14",
+    "stats": {
+      "goals": 1,
+      "assists": 1,
+      "pass_accuracy": "78%",
+      "shots_on_target": 5,
+      "distance_run": "8.8 km/match"
+    },
+    "radar": {
+      "pace": 76,
+      "shooting": 78,
+      "passing": 75,
+      "dribbling": 79,
+      "defending": 58,
+      "physicality": 77
+    },
+    "achievements": [
+      "High defensive return rate in Croatia flank",
+      "Key crosses and runs on left side",
+      "Scored decisive goal in group stages"
+    ]
+  },
+  {
+    "id": "player_vinicius",
+    "name": "Vinicius Jr.",
+    "team": "Brazil",
+    "position": "Left Winger",
+    "status": "Starting XI",
+    "fitness": "Fit (100%)",
+    "rating": 90,
+    "photo_placeholder": "VJ7",
+    "stats": {
+      "goals": 4,
+      "assists": 3,
+      "pass_accuracy": "81%",
+      "shots_on_target": 11,
+      "distance_run": "9.5 km/match"
+    },
+    "radar": {
+      "pace": 95,
+      "shooting": 84,
+      "passing": 80,
+      "dribbling": 93,
+      "defending": 29,
+      "physicality": 74
+    },
+    "achievements": [
+      "Brazil Wing Wizard",
+      "Highest pace recorded for Brazil (35.2 km/h)",
+      "Most progressive carries (38) in tournament"
+    ]
+  },
+  {
+    "id": "player_neymar",
+    "name": "Neymar Jr.",
+    "team": "Brazil",
+    "position": "Attacking Midfielder",
+    "status": "Starting XI",
+    "fitness": "Fit (100%)",
+    "rating": 88,
+    "photo_placeholder": "NJ10",
+    "stats": {
+      "goals": 3,
+      "assists": 2,
+      "pass_accuracy": "85%",
+      "shots_on_target": 7,
+      "distance_run": "8.0 km/match"
+    },
+    "radar": {
+      "pace": 82,
+      "shooting": 85,
+      "passing": 88,
+      "dribbling": 92,
+      "defending": 32,
+      "physicality": 64
+    },
+    "achievements": [
+      "Brazil Legend & Talisman",
+      "Created 4 big chances in bracket games",
+      "Top active goalscorer for Brazil"
+    ]
+  },
+  {
+    "id": "player_rodrygo",
+    "name": "Rodrygo",
+    "team": "Brazil",
+    "position": "Forward / Winger",
+    "status": "Starting XI",
+    "fitness": "Fit (100%)",
+    "rating": 85,
+    "photo_placeholder": "R11",
+    "stats": {
+      "goals": 2,
+      "assists": 2,
+      "pass_accuracy": "86%",
+      "shots_on_target": 6,
+      "distance_run": "9.1 km/match"
+    },
+    "radar": {
+      "pace": 88,
+      "shooting": 81,
+      "passing": 80,
+      "dribbling": 86,
+      "defending": 40,
+      "physicality": 70
+    },
+    "achievements": [
+      "Dynamic playmaking on right wing",
+      "Crucial goal contribution in opening game",
+      "Highest pressing recoveries in opponent half"
+    ]
+  },
+  {
+    "id": "player_gakpo",
+    "name": "Cody Gakpo",
+    "team": "Netherlands",
+    "position": "Forward / Left Winger",
+    "status": "Starting XI",
+    "fitness": "Fit (100%)",
+    "rating": 84,
+    "photo_placeholder": "CG11",
+    "stats": {
+      "goals": 3,
+      "assists": 1,
+      "pass_accuracy": "84%",
+      "shots_on_target": 7,
+      "distance_run": "9.7 km/match"
+    },
+    "radar": {
+      "pace": 87,
+      "shooting": 82,
+      "passing": 78,
+      "dribbling": 84,
+      "defending": 40,
+      "physicality": 76
+    },
+    "achievements": [
+      "Netherlands top goalscorer in tournament",
+      "Pivotal knockout stage goals",
+      "Highest duel success rate (58%) in air"
+    ]
+  },
+  {
+    "id": "player_vandijk",
+    "name": "Virgil van Dijk",
+    "team": "Netherlands",
+    "position": "Central Defender",
+    "status": "Starting XI",
+    "fitness": "Fit (100%)",
+    "rating": 89,
+    "photo_placeholder": "VVD4",
+    "stats": {
+      "goals": 1,
+      "assists": 0,
+      "pass_accuracy": "92%",
+      "shots_on_target": 2,
+      "distance_run": "8.9 km/match"
+    },
+    "radar": {
+      "pace": 78,
+      "shooting": 60,
+      "passing": 75,
+      "dribbling": 72,
+      "defending": 91,
+      "physicality": 88
+    },
+    "achievements": [
+      "Netherlands Captain & Defensive Wall",
+      "Most aerial duels won in tournament (22)",
+      "Led defense to 3 clean sheets"
+    ]
+  },
+  {
+    "id": "player_depay",
+    "name": "Memphis Depay",
+    "team": "Netherlands",
+    "position": "Forward",
+    "status": "Starting XI",
+    "fitness": "Slight Discomfort (85%)",
+    "rating": 82,
+    "photo_placeholder": "MD10",
+    "stats": {
+      "goals": 2,
+      "assists": 2,
+      "pass_accuracy": "80%",
+      "shots_on_target": 6,
+      "distance_run": "8.5 km/match"
+    },
+    "radar": {
+      "pace": 80,
+      "shooting": 82,
+      "passing": 80,
+      "dribbling": 84,
+      "defending": 30,
+      "physicality": 74
+    },
+    "achievements": [
+      "Netherlands primary attacking target",
+      "2 assists in group stage",
+      "Scored decisive penalty in Round of 16"
+    ]
+  }
+]

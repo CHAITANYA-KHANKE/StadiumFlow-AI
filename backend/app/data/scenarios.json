@@ -1,0 +1,174 @@
+[
+  {
+    "id": "reset",
+    "name": "Normal Operations",
+    "description": "Standard matchday operations. Gates open, normal crowd levels, no incidents.",
+    "active_incidents": [],
+    "gate_closures": [],
+    "gate_security_wait": {
+      "gate_a": 5,
+      "gate_b": 5,
+      "gate_c": 5,
+      "gate_d": 5,
+      "gate_e": 5,
+      "gate_f": 5,
+      "gate_g": 5,
+      "gate_h": 5
+    },
+    "concourse_congestion": {},
+    "facility_closures": []
+  },
+  {
+    "id": "gate_c_closure",
+    "name": "Gate C Structural Blockage",
+    "description": "Gate C (East Entrance) is temporarily closed due to an access path obstruction. Fans are redirected to Gates B or D.",
+    "active_incidents": [
+      {
+        "id": "inc_gate_c",
+        "title": "Gate C Obstruction",
+        "severity": "high",
+        "zone_id": "gate_c",
+        "message": "Gate C is closed. Please use Gate B or Gate D."
+      }
+    ],
+    "gate_closures": [
+      "gate_c"
+    ],
+    "gate_security_wait": {
+      "gate_a": 5,
+      "gate_b": 18,
+      "gate_c": 999,
+      "gate_d": 16,
+      "gate_e": 5,
+      "gate_f": 5,
+      "gate_g": 5,
+      "gate_h": 5
+    },
+    "concourse_congestion": {
+      "concourse_lower_90": 2.5,
+      "concourse_lower_45": 1.8,
+      "concourse_lower_135": 1.7
+    },
+    "facility_closures": []
+  },
+  {
+    "id": "gate_a_overload",
+    "name": "Gate A Security Overload",
+    "description": "Heavy visitor influx at Gate A (North) causes security lines to surge to 25 minutes. Fans are advised to use Gate H or B.",
+    "active_incidents": [
+      {
+        "id": "inc_gate_a_overload",
+        "title": "Gate A Crowding",
+        "severity": "medium",
+        "zone_id": "gate_a",
+        "message": "Gate A is facing high wait times (25 mins). Recommended alternatives: Gate H or B."
+      }
+    ],
+    "gate_closures": [],
+    "gate_security_wait": {
+      "gate_a": 25,
+      "gate_b": 7,
+      "gate_c": 5,
+      "gate_d": 5,
+      "gate_e": 5,
+      "gate_f": 5,
+      "gate_g": 5,
+      "gate_h": 6
+    },
+    "concourse_congestion": {
+      "concourse_lower_0": 2.0
+    },
+    "facility_closures": []
+  },
+  {
+    "id": "north_concourse_congested",
+    "name": "North Concourse Bottleneck",
+    "description": "Sudden crowd buildup in the North Lower Concourse near Food Stall L1. Rerouting rules will divert fans via East or West concourses.",
+    "active_incidents": [
+      {
+        "id": "inc_north_concourse",
+        "title": "Concourse Bottleneck",
+        "severity": "medium",
+        "zone_id": "concourse_lower_0",
+        "message": "Heavy congestion on lower North concourse. Consider walking via South side."
+      }
+    ],
+    "gate_closures": [],
+    "gate_security_wait": {
+      "gate_a": 5,
+      "gate_b": 5,
+      "gate_c": 5,
+      "gate_d": 5,
+      "gate_e": 5,
+      "gate_f": 5,
+      "gate_g": 5,
+      "gate_h": 5
+    },
+    "concourse_congestion": {
+      "concourse_lower_0": 4.0,
+      "concourse_lower_45": 2.5,
+      "concourse_lower_315": 2.5
+    },
+    "facility_closures": []
+  },
+  {
+    "id": "food_stall_l2_closed",
+    "name": "Food Stall L2 Shut Down",
+    "description": "Food Stall L2 (Lower East) closed due to technical faults. AI will redirect hungry fans to Food Stall L3 or L1.",
+    "active_incidents": [
+      {
+        "id": "inc_food_l2",
+        "title": "Food Counter Maintenance",
+        "severity": "low",
+        "zone_id": "food_l2",
+        "message": "Food Stall L2 is closed for maintenance. Closest alternatives: L1 or L3."
+      }
+    ],
+    "gate_closures": [],
+    "gate_security_wait": {
+      "gate_a": 5,
+      "gate_b": 5,
+      "gate_c": 5,
+      "gate_d": 5,
+      "gate_e": 5,
+      "gate_f": 5,
+      "gate_g": 5,
+      "gate_h": 5
+    },
+    "concourse_congestion": {},
+    "facility_closures": [
+      "food_l2"
+    ]
+  },
+  {
+    "id": "exit_transport_block",
+    "name": "Post-Match Gate E & F Congestion",
+    "description": "Post-match public transport delays create a major bottleneck at Southern exits. Fans are advised to exit through Northern gates.",
+    "active_incidents": [
+      {
+        "id": "inc_exit_block",
+        "title": "Transport Exit Congestion",
+        "severity": "high",
+        "zone_id": "concourse_lower_180",
+        "message": "Severe congestion at Southern Gates E & F. Please exit using Gate A, B, or H."
+      }
+    ],
+    "gate_closures": [],
+    "gate_security_wait": {
+      "gate_a": 5,
+      "gate_b": 5,
+      "gate_c": 5,
+      "gate_d": 5,
+      "gate_e": 35,
+      "gate_f": 30,
+      "gate_g": 5,
+      "gate_h": 5
+    },
+    "concourse_congestion": {
+      "concourse_lower_180": 3.5,
+      "concourse_lower_135": 2.5,
+      "concourse_lower_225": 2.5
+    },
+    "facility_closures": []
+  }
+]
