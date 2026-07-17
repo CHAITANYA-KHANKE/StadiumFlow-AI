@@ -1,7 +1,7 @@
-from typing import List, Dict, Any, Tuple
+from backend.app.schemas.recommendation import AlternativeOption, RecommendationRequest, RecommendationResponse
 from backend.app.services.live_state_manager import live_state_manager
 from backend.app.services.routing_engine import routing_engine
-from backend.app.schemas.recommendation import RecommendationResponse, AlternativeOption, RecommendationRequest
+
 
 class RecommendationEngine:
     def __init__(self):
@@ -10,16 +10,16 @@ class RecommendationEngine:
 
     def get_recommendations(self, request: RecommendationRequest) -> RecommendationResponse:
         """
-        Recommends the fastest available facility (restroom, food, medical, info) 
-        from the user's current location, accounting for both walking transit time 
+        Recommends the fastest available facility (restroom, food, medical, info)
+        from the user's current location, accounting for both walking transit time
         (via Dijkstra routing cost) and dynamic queue wait times.
-        
+
         Parameters:
-            request (RecommendationRequest): User's current location node, desired category, 
+            request (RecommendationRequest): User's current location node, desired category,
                                              and accessibility requirements.
-                                             
+
         Returns:
-            RecommendationResponse: The recommended option, estimated total transit + wait time, 
+            RecommendationResponse: The recommended option, estimated total transit + wait time,
                                    time saved compared to the closest physical facility, and alternative list.
         """
         current_node = request.current_node_id

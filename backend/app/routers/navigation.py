@@ -1,19 +1,19 @@
+import json
 import os
 import re
-import json
-from fastapi import APIRouter, HTTPException
 from typing import Optional
 
-from backend.app.schemas.stadium import StadiumSchema, LiveStateSchema, NodeSchema, EdgeSchema
+from fastapi import APIRouter, HTTPException
+
 from backend.app.schemas.navigation import RouteRequest, RouteResponse, TimelineRequest, TimelineResponse
 from backend.app.schemas.recommendation import RecommendationRequest, RecommendationResponse
-
-from backend.app.services.live_state_manager import live_state_manager
-from backend.app.services.routing_engine import routing_engine
-from backend.app.services.recommendation_engine import recommendation_engine
-from backend.app.services.timeline_engine import timeline_engine
-from backend.app.services.context_builder import ContextBuilder
+from backend.app.schemas.stadium import EdgeSchema, LiveStateSchema, NodeSchema, StadiumSchema
 from backend.app.services.ai_service import ai_service
+from backend.app.services.context_builder import ContextBuilder
+from backend.app.services.live_state_manager import live_state_manager
+from backend.app.services.recommendation_engine import recommendation_engine
+from backend.app.services.routing_engine import routing_engine
+from backend.app.services.timeline_engine import timeline_engine
 
 router = APIRouter()
 
@@ -51,13 +51,13 @@ def get_route(request: RouteRequest):
         raise HTTPException(status_code=400, detail="Invalid node ID pattern. Node IDs must be alphanumeric and under 50 characters.")
     try:
         res = routing_engine.calculate_route(request)
-        
+
         # Ground explanation using AI service
         if res.path_nodes:
             start_node = live_state_manager.nodes[request.start_node_id]
             end_node = live_state_manager.nodes[request.end_node_id]
             context_str = ContextBuilder.build_route_context(res, start_node["name"], end_node["name"])
-            
+
             # Ground with Gemini
             ai_exp = ai_service.explain_route(
                 context_str=context_str,
@@ -69,7 +69,7 @@ def get_route(request: RouteRequest):
                 lang="en"
             )
             res.reason_explanation = ai_exp
-            
+
         return res
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
@@ -88,7 +88,7 @@ def get_facility_recommendation(request: RecommendationRequest):
         raise HTTPException(status_code=400, detail="Invalid facility category.")
     try:
         res = recommendation_engine.get_recommendations(request)
-        
+
         # Ground explanation using AI service if reachable option exists
         if res.facility_id:
             context_str = ContextBuilder.build_recommendation_context(res, request.facility_category)
@@ -97,7 +97,7 @@ def get_facility_recommendation(request: RecommendationRequest):
                 if node["category"] == request.facility_category and node_id not in live_state_manager.facility_closures:
                     closest_name = node["name"]
                     break
-                    
+
             ai_exp = ai_service.explain_recommendation(
                 context_str=context_str,
                 recommended_option=res.recommended_option,
@@ -109,7 +109,7 @@ def get_facility_recommendation(request: RecommendationRequest):
                 lang="en"
             )
             res.reason_explanation = ai_exp
-            
+
         return res
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))

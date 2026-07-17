@@ -1,20 +1,22 @@
 import json
-import time
 import os
-from typing import Dict, List, Any
+import time
+from typing import Any, Dict, List
+
 from backend.app.schemas.stadium import IncidentSchema
+
 
 class LiveStateManager:
     def __init__(self):
         base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
         self.stadium_data_path = os.path.join(base_dir, "data", "stadium.json")
         self.scenarios_data_path = os.path.join(base_dir, "data", "scenarios.json")
-        
+
         self.nodes = {}
         self.edges = []
         self.scenarios = {}
         self.current_scenario_id = "reset"
-        
+
         # Live State In-Memory
         self.gate_security_wait: Dict[str, float] = {}
         self.gate_closures: List[str] = []
@@ -23,7 +25,7 @@ class LiveStateManager:
         self.facility_queues: Dict[str, float] = {}
         self.active_incidents: List[Dict[str, Any]] = []
         self.last_updated: float = time.time()
-        
+
         self.load_static_data()
         self.reset_to_default()
 
@@ -35,7 +37,7 @@ class LiveStateManager:
                 self.edges = data.get("edges", [])
                 for node in data.get("nodes", []):
                     self.nodes[node["id"]] = node
-        
+
         # Load Scenarios
         if os.path.exists(self.scenarios_data_path):
             with open(self.scenarios_data_path, 'r', encoding='utf-8') as f:
@@ -49,12 +51,12 @@ class LiveStateManager:
         self.facility_closures = []
         self.active_incidents = []
         self.concourse_congestion = {}
-        
+
         # Set default waits (5 mins for all gates)
         for node_id, node in self.nodes.items():
             if node["category"] == "gate":
                 self.gate_security_wait[node_id] = 5.0
-                
+
         # Set baseline queues for restrooms and food
         for node_id, node in self.nodes.items():
             if node["category"] == "restroom":
@@ -63,31 +65,31 @@ class LiveStateManager:
                 self.facility_queues[node_id] = 5.0 # baseline 5 mins
             elif node["category"] in ["medical", "info"]:
                 self.facility_queues[node_id] = 2.0 # baseline 2 mins
-                
+
         self.last_updated = time.time()
 
     def apply_scenario(self, scenario_id: str) -> bool:
         if scenario_id not in self.scenarios:
             return False
-        
+
         self.reset_to_default()
         sc = self.scenarios[scenario_id]
         self.current_scenario_id = scenario_id
-        
+
         self.gate_closures = sc.get("gate_closures", [])
         self.facility_closures = sc.get("facility_closures", [])
         self.active_incidents = sc.get("active_incidents", [])
-        
+
         # Apply gate security wait
         gate_waits = sc.get("gate_security_wait", {})
         for g_id, wait in gate_waits.items():
             self.gate_security_wait[g_id] = wait
-            
+
         # Apply concourse congestion multipliers
         congestion = sc.get("concourse_congestion", {})
         for c_id, multiplier in congestion.items():
             self.concourse_congestion[c_id] = multiplier
-            
+
         # Dynamically scale queue times at adjacent facilities during congestion
         for c_id, multiplier in congestion.items():
             for node_id, node in self.nodes.items():
@@ -112,7 +114,7 @@ class LiveStateManager:
                 zone_id=inc["zone_id"],
                 message=inc["message"]
             ))
-            
+
         return {
             "gate_security_wait": self.gate_security_wait,
             "gate_closures": self.gate_closures,

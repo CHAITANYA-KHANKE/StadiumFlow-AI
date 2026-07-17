@@ -1,22 +1,22 @@
-import time
-import re
-import os
-import urllib.request
 import json
+import os
+import time
+import urllib.request
+from typing import Dict, List
+
 from fastapi import FastAPI, Request, status
-from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
-from typing import Dict, Any, List
+from fastapi.responses import JSONResponse
 
 # Import Config and Services
 from backend.app.core.config import settings
-from backend.app.services.ai_service import ai_service
+from backend.app.routers.feedback import router as feedback_router
 
 # Import Routers
 from backend.app.routers.navigation import router as navigation_router
-from backend.app.routers.simulation import router as simulation_router
-from backend.app.routers.feedback import router as feedback_router
 from backend.app.routers.operations import router as operations_router
+from backend.app.routers.simulation import router as simulation_router
+from backend.app.services.ai_service import ai_service
 
 app = FastAPI(
     title="StadiumFlow AI",
@@ -55,7 +55,7 @@ class ServerlessRateLimiter:
                 with urllib.request.urlopen(req, timeout=1.0) as response:
                     res_data = json.loads(response.read().decode())
                     current_count = int(res_data.get("result", 1))
-                
+
                 # If it is the first increment in the window, set expire
                 if current_count == 1:
                     expire_url = f"{self.redis_url}/expire/{key}/{window}"
@@ -66,7 +66,7 @@ class ServerlessRateLimiter:
                     )
                     with urllib.request.urlopen(ex_req, timeout=1.0) as _:
                         pass
-                
+
                 return current_count <= limit
             except Exception as e:
                 # Fallback to local in-memory dict on any network error
@@ -77,10 +77,10 @@ class ServerlessRateLimiter:
             self.local_db[ip] = [t for t in self.local_db[ip] if current_time - t < window]
         else:
             self.local_db[ip] = []
-            
+
         if len(self.local_db[ip]) >= limit:
             return False
-            
+
         self.local_db[ip].append(current_time)
         return True
 
@@ -113,14 +113,14 @@ async def add_security_headers_and_rate_limit(request: Request, call_next):
 
     # Proceed with request
     response = await call_next(request)
-    
+
     # 3. Security Headers
     response.headers["X-Frame-Options"] = "DENY"
     response.headers["X-Content-Type-Options"] = "nosniff"
     response.headers["X-XSS-Protection"] = "1; mode=block"
     response.headers["Content-Security-Policy"] = "default-src 'self'; script-src 'self'; style-src 'self';"
     response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
-    
+
     return response
 
 # Core Health Check

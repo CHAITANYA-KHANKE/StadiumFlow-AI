@@ -1,4 +1,5 @@
-from typing import Dict, Any, List
+from typing import Any, Dict, List
+
 
 class AIFallbackService:
     @staticmethod
@@ -31,7 +32,7 @@ class AIFallbackService:
     @staticmethod
     def get_recommendation_explanation(recommended_option: str, category: str, est_time: float, time_saved: float, reason_codes: List[str], closest_name: str, lang: str = "en") -> str:
         is_spanish = lang == "es"
-        
+
         if "CLOSEST_IS_FASTEST" in reason_codes:
             if lang == "hi":
                 return f"{recommended_option} अभी के लिए सबसे पास और सबसे तेज़ {category} विकल्प है। वहाँ पहुँचने में {est_time} मिनट लगेंगे।"
@@ -41,7 +42,7 @@ class AIFallbackService:
                 return f"{recommended_option} es actualmente la opción de {category} más cercana y rápida. Tomará aproximadamente {est_time} minutos."
             else:
                 return f"{recommended_option} is currently the closest and fastest {category} option. It will take about {est_time} minutes."
-        
+
         if time_saved > 0:
             if lang == "hi":
                 return (
@@ -63,7 +64,7 @@ class AIFallbackService:
                     f"We recommend {recommended_option}. It is slightly farther than the closest option ({closest_name}), "
                     f"but its shorter queue will save you about {time_saved} minutes overall. Total expected time: {est_time} mins."
                 )
-                
+
         if lang == "hi":
             return f"हमने आपके लिए {recommended_option} का सुझाव दिया है। कुल अपेक्षित समय: {est_time} मिनट।"
         elif lang == "hinglish":
@@ -78,7 +79,7 @@ class AIFallbackService:
         is_spanish = lang == "es"
         incidents = live_state.get("active_incidents", [])
         closures = live_state.get("gate_closures", [])
-        
+
         brief = ""
         if lang == "hi":
             brief += "### 🏟️ स्मार्ट स्टेडियम एआई संचालन रिपोर्ट\n\n"
@@ -124,14 +125,14 @@ class AIFallbackService:
                 for g_id in closures:
                     brief += f"- 🛑 Gate Closed: {nodes.get(g_id, {}).get('name', g_id)} is currently closed.\n"
             brief += "\nAI Model Offline: Running on deterministic rule backup."
-            
+
         return brief
 
     @staticmethod
     def get_assistant_answer(query: str, current_node: str, live_state: Dict[str, Any], nodes: Dict[str, Any], lang: str = "en") -> str:
         q_lower = query.lower()
         is_spanish = lang == "es"
-        
+
         # Simple keywords router
         if "restroom" in q_lower or "washroom" in q_lower or "toilet" in q_lower or "shauchalay" in q_lower or "baño" in q_lower:
             if lang == "hi":
@@ -142,7 +143,7 @@ class AIFallbackService:
                 return "Puede consultar la pestaña 'Explorador de Instalaciones' para encontrar el baño más rápido disponible. Calculamos el tiempo de caminata y de cola."
             else:
                 return "You can check the 'Facility Explorer' tab to find the fastest Restroom available. We calculate both walking and queue wait times to recommend the best option."
-        
+
         if "food" in q_lower or "snack" in q_lower or "drink" in q_lower or "hungry" in q_lower or "khana" in q_lower or "comida" in q_lower:
             if lang == "hi":
                 return "स्टेडियम में कई फूड काउंटर उपलब्ध हैं। आप 'सुविधा कतार एक्सप्लोरर' में फूड श्रेणी का चयन करके सबसे कम कतार वाला विकल्प चुन सकते हैं।"
@@ -152,7 +153,7 @@ class AIFallbackService:
                 return "Tenemos varios puestos de comida disponibles. Consulte la pestaña 'Explorador de Instalaciones' para ver cuál tiene la fila más corta."
             else:
                 return "We have multiple food concessions (stalls, sports bars). Please check the 'Facility Explorer' to see which counter has the shortest queue time right now."
-        
+
         if "gate" in q_lower or "entrance" in q_lower or "entry" in q_lower or "dwar" in q_lower or "puerta" in q_lower:
             closed_gates = [nodes.get(g_id, {}).get('name', g_id) for g_id in live_state.get("gate_closures", [])]
             if closed_gates:

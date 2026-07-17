@@ -1,7 +1,6 @@
-import pytest
 from fastapi.testclient import TestClient
+
 from backend.app.main import app
-from backend.app.services.live_state_manager import live_state_manager
 
 client = TestClient(app)
 

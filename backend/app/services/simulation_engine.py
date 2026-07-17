@@ -1,6 +1,6 @@
-from typing import List, Dict, Any
+from backend.app.schemas.simulation import ImpactReport, SimulationImpactResponse
 from backend.app.services.live_state_manager import live_state_manager
-from backend.app.schemas.simulation import SimulationImpactResponse, ImpactReport
+
 
 class SimulationEngine:
     def __init__(self):
@@ -11,10 +11,10 @@ class SimulationEngine:
         Triggers a predefined stadium incident/scenario by updating the live state.
         Calculates before and after metrics (gate wait averages, concourse congestion averages)
         to compile a comparative Impact Report for stadium operators.
-        
+
         Parameters:
             scenario_id (str): The identifier of the simulation scenario to trigger.
-            
+
         Returns:
             SimulationImpactResponse: Detailed metrics on critical zones, affected areas, and local impact summary.
         """
@@ -22,7 +22,7 @@ class SimulationEngine:
         # Average gate wait before:
         before_gate_waits = [5.0 for n in self.manager.nodes.values() if n["category"] == "gate"]
         avg_wait_before = sum(before_gate_waits) / len(before_gate_waits) if before_gate_waits else 5.0
-        
+
         # Average concourse congestion before:
         before_congestion = [1.0 for n in self.manager.nodes.values() if n["category"] == "concourse"]
         avg_cong_before = sum(before_congestion) / len(before_congestion) if before_congestion else 1.0
@@ -108,7 +108,7 @@ class SimulationEngine:
     def reset_simulation(self) -> str:
         """
         Resets the stadium live state to standard baseline values.
-        This closes active incidents, clears gate and facility closures, 
+        This closes active incidents, clears gate and facility closures,
         and resets gate queue times back to standard normals (e.g. 5 minutes).
         """
         self.manager.reset_to_default()

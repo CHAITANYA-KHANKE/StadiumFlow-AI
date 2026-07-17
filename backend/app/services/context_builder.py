@@ -1,6 +1,8 @@
-from typing import Dict, Any, List
+from typing import Any, Dict, List
+
 from backend.app.schemas.navigation import RouteResponse
 from backend.app.schemas.recommendation import RecommendationResponse
+
 
 class ContextBuilder:
     @staticmethod
@@ -21,7 +23,7 @@ class ContextBuilder:
         alt_str = ""
         for alt in response.alternatives:
             alt_str += f"- {alt.name}: Walk {alt.walking_time} mins + Queue {alt.queue_time} mins = Total {alt.total_time} mins\n"
-        
+
         return (
             f"Category Requested: {category}\n"
             f"Best Option Recommended: {response.recommended_option} (ID: {response.facility_id})\n"
@@ -36,12 +38,12 @@ class ContextBuilder:
         active_inc = ""
         for inc in live_state.get("active_incidents", []):
             active_inc += f"- [{inc.severity.upper()}] {inc.title}: {inc.message} (Zone: {nodes.get(inc.zone_id, {}).get('name', inc.zone_id)})\n"
-            
+
         gate_waits = ""
         for g_id, wait in live_state.get("gate_security_wait", {}).items():
             status = "CLOSED" if g_id in live_state.get("gate_closures", []) else f"{wait} mins wait"
             gate_waits += f"- {nodes.get(g_id, {}).get('name', g_id)}: {status}\n"
-            
+
         facility_closures = ", ".join([nodes.get(f_id, {}).get('name', f_id) for f_id in live_state.get("facility_closures", [])])
         concourse_congestion = ""
         for c_id, multiplier in live_state.get("concourse_congestion", {}).items():
