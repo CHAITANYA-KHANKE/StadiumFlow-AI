@@ -20,6 +20,7 @@ router = APIRouter()
 cached_stadium_schema: Optional[StadiumSchema] = None
 NODE_ID_REGEX = re.compile(r"^[a-zA-Z0-9_]{1,50}$")
 
+
 @router.get("/api/stadium", response_model=StadiumSchema)
 def get_stadium_topology():
     """
@@ -28,11 +29,9 @@ def get_stadium_topology():
     """
     global cached_stadium_schema
     if cached_stadium_schema is None:
-        cached_stadium_schema = StadiumSchema(
-            nodes=[NodeSchema(**n) for n in live_state_manager.nodes.values()],
-            edges=[EdgeSchema(**e) for e in live_state_manager.edges]
-        )
+        cached_stadium_schema = StadiumSchema(nodes=[NodeSchema(**n) for n in live_state_manager.nodes.values()], edges=[EdgeSchema(**e) for e in live_state_manager.edges])
     return cached_stadium_schema
+
 
 @router.get("/api/live-state", response_model=LiveStateSchema)
 def get_live_state():
@@ -40,6 +39,7 @@ def get_live_state():
     Retrieve the real-time queue times, gate/facility closures, concourse congestions, and active alerts.
     """
     return LiveStateSchema(**live_state_manager.get_live_state())
+
 
 @router.post("/api/route", response_model=RouteResponse)
 def get_route(request: RouteRequest):
@@ -59,15 +59,7 @@ def get_route(request: RouteRequest):
             context_str = ContextBuilder.build_route_context(res, start_node["name"], end_node["name"])
 
             # Ground with Gemini
-            ai_exp = ai_service.explain_route(
-                context_str=context_str,
-                start_name=start_node["name"],
-                end_name=end_node["name"],
-                total_dist=res.total_distance,
-                est_time=res.estimated_time,
-                avg_cong=res.crowd_congestion_level,
-                lang="en"
-            )
+            ai_exp = ai_service.explain_route(context_str=context_str, start_name=start_node["name"], end_name=end_node["name"], total_dist=res.total_distance, est_time=res.estimated_time, avg_cong=res.crowd_congestion_level, lang="en")
             res.reason_explanation = ai_exp
 
         return res
@@ -75,6 +67,7 @@ def get_route(request: RouteRequest):
         raise HTTPException(status_code=400, detail=str(e))
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Internal Server Error: {str(e)}")
+
 
 @router.post("/api/recommend-facility", response_model=RecommendationResponse)
 def get_facility_recommendation(request: RecommendationRequest):
@@ -99,14 +92,7 @@ def get_facility_recommendation(request: RecommendationRequest):
                     break
 
             ai_exp = ai_service.explain_recommendation(
-                context_str=context_str,
-                recommended_option=res.recommended_option,
-                category=request.facility_category,
-                est_time=res.estimated_total_time,
-                time_saved=res.time_saved,
-                reason_codes=res.reason_codes,
-                closest_name=closest_name,
-                lang="en"
+                context_str=context_str, recommended_option=res.recommended_option, category=request.facility_category, est_time=res.estimated_total_time, time_saved=res.time_saved, reason_codes=res.reason_codes, closest_name=closest_name, lang="en"
             )
             res.reason_explanation = ai_exp
 
@@ -115,6 +101,7 @@ def get_facility_recommendation(request: RecommendationRequest):
         raise HTTPException(status_code=400, detail=str(e))
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Internal Server Error: {str(e)}")
+
 
 @router.post("/api/timeline", response_model=TimelineResponse)
 def get_timeline(request: TimelineRequest):
@@ -126,6 +113,7 @@ def get_timeline(request: TimelineRequest):
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Internal Server Error: {str(e)}")
 
+
 @router.get("/api/matches")
 def get_all_matches():
     """
@@ -134,11 +122,12 @@ def get_all_matches():
     try:
         path = os.path.join(os.path.dirname(__file__), "..", "data", "matches.json")
         if os.path.exists(path):
-            with open(path, 'r', encoding='utf-8') as f:
+            with open(path, "r", encoding="utf-8") as f:
                 return json.load(f)
         return []
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
 
 @router.get("/api/players")
 def get_all_players():
@@ -148,7 +137,7 @@ def get_all_players():
     try:
         path = os.path.join(os.path.dirname(__file__), "..", "data", "players.json")
         if os.path.exists(path):
-            with open(path, 'r', encoding='utf-8') as f:
+            with open(path, "r", encoding="utf-8") as f:
                 return json.load(f)
         return []
     except Exception as e:

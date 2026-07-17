@@ -18,11 +18,7 @@ from backend.app.routers.operations import router as operations_router
 from backend.app.routers.simulation import router as simulation_router
 from backend.app.services.ai_service import ai_service
 
-app = FastAPI(
-    title="StadiumFlow AI",
-    description="Real-Time Decision Intelligence API for Smart Stadiums & Tournament Experiences",
-    version="1.0.0"
-)
+app = FastAPI(title="StadiumFlow AI", description="Real-Time Decision Intelligence API for Smart Stadiums & Tournament Experiences", version="1.0.0")
 
 # CORS Setup
 origins = [o.strip() for o in settings.CORS_ORIGINS.split(",") if o.strip()]
@@ -51,11 +47,7 @@ class ServerlessRateLimiter:
                 incr_url = f"{self.redis_url}/incr/{key}"
                 if not incr_url.startswith(("http://", "https://")):
                     raise ValueError("Insecure URL scheme")
-                req = urllib.request.Request(
-                    incr_url,
-                    headers={"Authorization": f"Bearer {self.redis_token}"},
-                    method="POST"
-                )
+                req = urllib.request.Request(incr_url, headers={"Authorization": f"Bearer {self.redis_token}"}, method="POST")
                 with urllib.request.urlopen(req, timeout=1.0) as response:  # nosec B310
                     res_data = json.loads(response.read().decode())
                     current_count = int(res_data.get("result", 1))
@@ -65,11 +57,7 @@ class ServerlessRateLimiter:
                     expire_url = f"{self.manager_url if hasattr(self, 'manager_url') else self.redis_url}/expire/{key}/{window}"
                     if not expire_url.startswith(("http://", "https://")):
                         raise ValueError("Insecure URL scheme")
-                    ex_req = urllib.request.Request(
-                        expire_url,
-                        headers={"Authorization": f"Bearer {self.redis_token}"},
-                        method="POST"
-                    )
+                    ex_req = urllib.request.Request(expire_url, headers={"Authorization": f"Bearer {self.redis_token}"}, method="POST")
                     with urllib.request.urlopen(ex_req, timeout=1.0) as _:  # nosec B310
                         pass
 
@@ -90,7 +78,9 @@ class ServerlessRateLimiter:
         self.local_db[ip].append(current_time)
         return True
 
+
 limiter = ServerlessRateLimiter()
+
 
 @app.middleware("http")
 async def add_security_headers_and_rate_limit(request: Request, call_next):
@@ -99,23 +89,14 @@ async def add_security_headers_and_rate_limit(request: Request, call_next):
     if content_length:
         try:
             if int(content_length) > 1 * 1024 * 1024:
-                return JSONResponse(
-                    status_code=status.HTTP_413_REQUEST_ENTITY_TOO_LARGE,
-                    content={"detail": "Payload too large. Maximum allowed size is 1MB."}
-                )
+                return JSONResponse(status_code=status.HTTP_413_REQUEST_ENTITY_TOO_LARGE, content={"detail": "Payload too large. Maximum allowed size is 1MB."})
         except ValueError:
-            return JSONResponse(
-                status_code=status.HTTP_400_BAD_REQUEST,
-                content={"detail": "Invalid content-length header."}
-            )
+            return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content={"detail": "Invalid content-length header."})
 
     # 2. Rate Limiting Check (Max 100 requests per minute per IP)
     client_ip = request.client.host if request.client else "unknown"
     if not limiter.is_allowed(client_ip, limit=100, window=60):
-        return JSONResponse(
-            status_code=status.HTTP_429_TOO_MANY_REQUESTS,
-            content={"detail": "Rate limit exceeded. Please try again later."}
-        )
+        return JSONResponse(status_code=status.HTTP_429_TOO_MANY_REQUESTS, content={"detail": "Rate limit exceeded. Please try again later."})
 
     # Proceed with request
     response = await call_next(request)
@@ -129,14 +110,12 @@ async def add_security_headers_and_rate_limit(request: Request, call_next):
 
     return response
 
+
 # Core Health Check
 @app.get("/api/health")
 def health_check():
-    return {
-        "status": "healthy",
-        "timestamp": time.time(),
-        "gemini_api_active": ai_service.initialized
-    }
+    return {"status": "healthy", "timestamp": time.time(), "gemini_api_active": ai_service.initialized}
+
 
 # Include routers
 app.include_router(navigation_router)

@@ -30,158 +30,59 @@ def test_fallback_route_explanation():
 
 def test_fallback_recommendation_explanation():
     # Closest is fastest (English)
-    exp_closest = AIFallbackService.get_recommendation_explanation(
-        recommended_option="Restroom L1",
-        category="restroom",
-        est_time=4.5,
-        time_saved=0.0,
-        reason_codes=["CLOSEST_IS_FASTEST"],
-        closest_name="Restroom L1",
-        lang="en"
-    )
+    exp_closest = AIFallbackService.get_recommendation_explanation(recommended_option="Restroom L1", category="restroom", est_time=4.5, time_saved=0.0, reason_codes=["CLOSEST_IS_FASTEST"], closest_name="Restroom L1", lang="en")
     assert "closest and fastest" in exp_closest
 
     # Closest is fastest (Hindi)
-    exp_closest_hi = AIFallbackService.get_recommendation_explanation(
-        recommended_option="Restroom L1",
-        category="restroom",
-        est_time=4.5,
-        time_saved=0.0,
-        reason_codes=["CLOSEST_IS_FASTEST"],
-        closest_name="Restroom L1",
-        lang="hi"
-    )
+    exp_closest_hi = AIFallbackService.get_recommendation_explanation(recommended_option="Restroom L1", category="restroom", est_time=4.5, time_saved=0.0, reason_codes=["CLOSEST_IS_FASTEST"], closest_name="Restroom L1", lang="hi")
     assert "सबसे पास" in exp_closest_hi
 
     # Closest is fastest (Hinglish)
-    exp_closest_hinglish = AIFallbackService.get_recommendation_explanation(
-        recommended_option="Restroom L1",
-        category="restroom",
-        est_time=4.5,
-        time_saved=0.0,
-        reason_codes=["CLOSEST_IS_FASTEST"],
-        closest_name="Restroom L1",
-        lang="hinglish"
-    )
+    exp_closest_hinglish = AIFallbackService.get_recommendation_explanation(recommended_option="Restroom L1", category="restroom", est_time=4.5, time_saved=0.0, reason_codes=["CLOSEST_IS_FASTEST"], closest_name="Restroom L1", lang="hinglish")
     assert "sabse paas" in exp_closest_hinglish
 
     # Closest is fastest (Spanish)
-    exp_closest_es = AIFallbackService.get_recommendation_explanation(
-        recommended_option="Restroom L1",
-        category="restroom",
-        est_time=4.5,
-        time_saved=0.0,
-        reason_codes=["CLOSEST_IS_FASTEST"],
-        closest_name="Restroom L1",
-        lang="es"
-    )
+    exp_closest_es = AIFallbackService.get_recommendation_explanation(recommended_option="Restroom L1", category="restroom", est_time=4.5, time_saved=0.0, reason_codes=["CLOSEST_IS_FASTEST"], closest_name="Restroom L1", lang="es")
     assert "más cercana y rápida" in exp_closest_es
 
     # Shorter queue time saved (English)
-    exp_saved_en = AIFallbackService.get_recommendation_explanation(
-        recommended_option="Restroom L2",
-        category="restroom",
-        est_time=6.2,
-        time_saved=8.5,
-        reason_codes=["SHORTER_QUEUE"],
-        closest_name="Restroom L1",
-        lang="en"
-    )
+    exp_saved_en = AIFallbackService.get_recommendation_explanation(recommended_option="Restroom L2", category="restroom", est_time=6.2, time_saved=8.5, reason_codes=["SHORTER_QUEUE"], closest_name="Restroom L1", lang="en")
     assert "save you about 8.5 minutes" in exp_saved_en
 
     # Shorter queue time saved (Hindi)
-    exp_saved_hi = AIFallbackService.get_recommendation_explanation(
-        recommended_option="Restroom L2",
-        category="restroom",
-        est_time=6.2,
-        time_saved=8.5,
-        reason_codes=["SHORTER_QUEUE"],
-        closest_name="Restroom L1",
-        lang="hi"
-    )
+    exp_saved_hi = AIFallbackService.get_recommendation_explanation(recommended_option="Restroom L2", category="restroom", est_time=6.2, time_saved=8.5, reason_codes=["SHORTER_QUEUE"], closest_name="Restroom L1", lang="hi")
     assert "Restroom L2" in exp_saved_hi
     assert "8.5 मिनट बचेंगे" in exp_saved_hi
 
     # Shorter queue time saved (Hinglish)
-    exp_saved_hinglish = AIFallbackService.get_recommendation_explanation(
-        recommended_option="Restroom L2",
-        category="restroom",
-        est_time=6.2,
-        time_saved=8.5,
-        reason_codes=["SHORTER_QUEUE"],
-        closest_name="Restroom L1",
-        lang="hinglish"
-    )
+    exp_saved_hinglish = AIFallbackService.get_recommendation_explanation(recommended_option="Restroom L2", category="restroom", est_time=6.2, time_saved=8.5, reason_codes=["SHORTER_QUEUE"], closest_name="Restroom L1", lang="hinglish")
     assert "Restroom L2" in exp_saved_hinglish
     assert "8.5 minutes bachenge" in exp_saved_hinglish
 
     # Shorter queue time saved (Spanish)
-    exp_saved_es = AIFallbackService.get_recommendation_explanation(
-        recommended_option="Restroom L2",
-        category="restroom",
-        est_time=6.2,
-        time_saved=8.5,
-        reason_codes=["SHORTER_QUEUE"],
-        closest_name="Restroom L1",
-        lang="es"
-    )
+    exp_saved_es = AIFallbackService.get_recommendation_explanation(recommended_option="Restroom L2", category="restroom", est_time=6.2, time_saved=8.5, reason_codes=["SHORTER_QUEUE"], closest_name="Restroom L1", lang="es")
     assert "ahorrará aproximadamente 8.5 minutos" in exp_saved_es
 
     # Default recommendation (English)
-    exp_def_en = AIFallbackService.get_recommendation_explanation(
-        recommended_option="Restroom L2",
-        category="restroom",
-        est_time=6.2,
-        time_saved=0.0,
-        reason_codes=[],
-        closest_name="Restroom L1",
-        lang="en"
-    )
+    exp_def_en = AIFallbackService.get_recommendation_explanation(recommended_option="Restroom L2", category="restroom", est_time=6.2, time_saved=0.0, reason_codes=[], closest_name="Restroom L1", lang="en")
     assert "recommend using Restroom L2" in exp_def_en
 
     # Default recommendation (Hindi)
-    exp_def_hi = AIFallbackService.get_recommendation_explanation(
-        recommended_option="Restroom L2",
-        category="restroom",
-        est_time=6.2,
-        time_saved=0.0,
-        reason_codes=[],
-        closest_name="Restroom L1",
-        lang="hi"
-    )
+    exp_def_hi = AIFallbackService.get_recommendation_explanation(recommended_option="Restroom L2", category="restroom", est_time=6.2, time_saved=0.0, reason_codes=[], closest_name="Restroom L1", lang="hi")
     assert "सुझाव दिया है" in exp_def_hi
 
     # Default recommendation (Hinglish)
-    exp_def_hinglish = AIFallbackService.get_recommendation_explanation(
-        recommended_option="Restroom L2",
-        category="restroom",
-        est_time=6.2,
-        time_saved=0.0,
-        reason_codes=[],
-        closest_name="Restroom L1",
-        lang="hinglish"
-    )
+    exp_def_hinglish = AIFallbackService.get_recommendation_explanation(recommended_option="Restroom L2", category="restroom", est_time=6.2, time_saved=0.0, reason_codes=[], closest_name="Restroom L1", lang="hinglish")
     assert "suggest kiya hai" in exp_def_hinglish
 
     # Default recommendation (Spanish)
-    exp_def_es = AIFallbackService.get_recommendation_explanation(
-        recommended_option="Restroom L2",
-        category="restroom",
-        est_time=6.2,
-        time_saved=0.0,
-        reason_codes=[],
-        closest_name="Restroom L1",
-        lang="es"
-    )
+    exp_def_es = AIFallbackService.get_recommendation_explanation(recommended_option="Restroom L2", category="restroom", est_time=6.2, time_saved=0.0, reason_codes=[], closest_name="Restroom L1", lang="es")
     assert "Recomendamos usar Restroom L2" in exp_def_es
 
 
 def test_fallback_operations_brief():
     nodes = {"gate_a": {"name": "Gate A (North)"}}
-    live_state = {
-        "active_incidents": [],
-        "gate_closures": []
-    }
+    live_state = {"active_incidents": [], "gate_closures": []}
     brief = AIFallbackService.get_operations_brief(live_state, nodes, "en")
     assert "operating normally" in brief
 
@@ -196,10 +97,7 @@ def test_fallback_operations_brief():
 
     # Test with incidents and closures
     incident = IncidentSchema(id="1", title="Crowd buildup", severity="high", zone_id="gate_a", message="Heavy crowd")
-    live_state_inc = {
-        "active_incidents": [incident],
-        "gate_closures": ["gate_a"]
-    }
+    live_state_inc = {"active_incidents": [incident], "gate_closures": ["gate_a"]}
     brief_inc_en = AIFallbackService.get_operations_brief(live_state_inc, nodes, "en")
     assert "Crowd Closed" not in brief_inc_en
     assert "Gate Closed: Gate A (North) is currently closed" in brief_inc_en
@@ -216,10 +114,7 @@ def test_fallback_operations_brief():
 
 def test_fallback_assistant_answer():
     nodes = {"gate_a": {"name": "Gate A (North)"}}
-    live_state = {
-        "active_incidents": [],
-        "gate_closures": []
-    }
+    live_state = {"active_incidents": [], "gate_closures": []}
     # Restrooms
     assert "Facility Explorer" in AIFallbackService.get_assistant_answer("where is the restroom", "gate_a", live_state, nodes, "en")
     assert "toilet dundh" in AIFallbackService.get_assistant_answer("where is the restroom", "gate_a", live_state, nodes, "hinglish")
@@ -239,10 +134,7 @@ def test_fallback_assistant_answer():
     assert "Todas las puertas están abiertas" in AIFallbackService.get_assistant_answer("gates", "gate_a", live_state, nodes, "es")
 
     # Gates (With closures)
-    live_state_closed = {
-        "active_incidents": [],
-        "gate_closures": ["gate_a"]
-    }
+    live_state_closed = {"active_incidents": [], "gate_closures": ["gate_a"]}
     assert "closed" in AIFallbackService.get_assistant_answer("gates", "gate_a", live_state_closed, nodes, "en")
     assert "closed" in AIFallbackService.get_assistant_answer("gates", "gate_a", live_state_closed, nodes, "hinglish")
     assert "बंद हैं" in AIFallbackService.get_assistant_answer("gates", "gate_a", live_state_closed, nodes, "hi")

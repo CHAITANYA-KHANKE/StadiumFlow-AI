@@ -17,14 +17,7 @@ def test_scenario_gate_c_closure():
 
 
 def test_all_simulation_scenarios():
-    scenarios = [
-        "gate_c_closure",
-        "gate_a_overload",
-        "north_concourse_congested",
-        "food_stall_l2_closed",
-        "exit_transport_block",
-        "normal"
-    ]
+    scenarios = ["gate_c_closure", "gate_a_overload", "north_concourse_congested", "food_stall_l2_closed", "exit_transport_block", "normal"]
     for sc in scenarios:
         live_state_manager.reset_to_default()
         if sc == "normal":

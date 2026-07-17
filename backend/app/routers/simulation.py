@@ -9,6 +9,7 @@ from backend.app.services.simulation_engine import simulation_engine
 
 router = APIRouter()
 
+
 @router.post("/api/simulation/scenario", response_model=SimulationImpactResponse)
 def trigger_scenario(request: ScenarioTriggerRequest, admin_token: str = Depends(verify_admin_token)):
     """
@@ -23,12 +24,7 @@ def trigger_scenario(request: ScenarioTriggerRequest, admin_token: str = Depends
         live_state = live_state_manager.get_live_state()
         context_str = ContextBuilder.build_operations_context(live_state, live_state_manager.nodes)
 
-        ai_brief = ai_service.explain_operations_brief(
-            context_str=context_str,
-            live_state=live_state,
-            nodes=live_state_manager.nodes,
-            lang="en"
-        )
+        ai_brief = ai_service.explain_operations_brief(context_str=context_str, live_state=live_state, nodes=live_state_manager.nodes, lang="en")
         res.ai_impact_summary = ai_brief
 
         return res
@@ -36,6 +32,7 @@ def trigger_scenario(request: ScenarioTriggerRequest, admin_token: str = Depends
         raise HTTPException(status_code=400, detail=str(e))
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Internal Server Error: {str(e)}")
+
 
 @router.post("/api/simulation/reset")
 def reset_simulation(admin_token: str = Depends(verify_admin_token)):

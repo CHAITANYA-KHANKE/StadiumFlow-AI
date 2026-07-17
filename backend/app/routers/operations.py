@@ -14,6 +14,7 @@ cached_ops_summary = None
 cached_ops_scenario_id = None
 cached_ops_last_updated = None
 
+
 @router.get("/api/operations/summary")
 def get_operations_summary(admin_token: str = Depends(verify_admin_token)):
     """
@@ -29,33 +30,21 @@ def get_operations_summary(admin_token: str = Depends(verify_admin_token)):
 
         # Check if cache is still valid
         if cached_ops_summary is not None and cached_ops_scenario_id == scenario_id and cached_ops_last_updated == last_updated:
-            return {
-                "summary": cached_ops_summary,
-                "timestamp": time.time(),
-                "cached": True
-            }
+            return {"summary": cached_ops_summary, "timestamp": time.time(), "cached": True}
 
         context_str = ContextBuilder.build_operations_context(live_state, live_state_manager.nodes)
 
-        brief = ai_service.explain_operations_brief(
-            context_str=context_str,
-            live_state=live_state,
-            nodes=live_state_manager.nodes,
-            lang="en"
-        )
+        brief = ai_service.explain_operations_brief(context_str=context_str, live_state=live_state, nodes=live_state_manager.nodes, lang="en")
 
         # Save to cache
         cached_ops_summary = brief
         cached_ops_scenario_id = scenario_id
         cached_ops_last_updated = last_updated
 
-        return {
-            "summary": brief,
-            "timestamp": time.time(),
-            "cached": False
-        }
+        return {"summary": brief, "timestamp": time.time(), "cached": False}
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Internal Server Error: {str(e)}")
+
 
 @router.post("/api/assistant")
 def chat_assistant(request: Dict[str, Any]):
@@ -74,17 +63,6 @@ def chat_assistant(request: Dict[str, Any]):
     live_state = live_state_manager.get_live_state()
     context_str = ContextBuilder.build_operations_context(live_state, live_state_manager.nodes)
 
-    answer = ai_service.answer_assistant_query(
-        query=query,
-        context_str=context_str,
-        current_node=current_node,
-        live_state=live_state,
-        nodes=live_state_manager.nodes,
-        lang=lang
-    )
+    answer = ai_service.answer_assistant_query(query=query, context_str=context_str, current_node=current_node, live_state=live_state, nodes=live_state_manager.nodes, lang=lang)
 
-    return {
-        "query": query,
-        "answer": answer,
-        "timestamp": time.time()
-    }
+    return {"query": query, "answer": answer, "timestamp": time.time()}

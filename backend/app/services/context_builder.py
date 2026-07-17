@@ -44,7 +44,7 @@ class ContextBuilder:
             status = "CLOSED" if g_id in live_state.get("gate_closures", []) else f"{wait} mins wait"
             gate_waits += f"- {nodes.get(g_id, {}).get('name', g_id)}: {status}\n"
 
-        facility_closures = ", ".join([nodes.get(f_id, {}).get('name', f_id) for f_id in live_state.get("facility_closures", [])])
+        facility_closures = ", ".join([nodes.get(f_id, {}).get("name", f_id) for f_id in live_state.get("facility_closures", [])])
         concourse_congestion = ""
         for c_id, multiplier in live_state.get("concourse_congestion", {}).items():
             concourse_congestion += f"- {nodes.get(c_id, {}).get('name', c_id)}: {multiplier}x congestion multiplier\n"
@@ -63,13 +63,7 @@ class ContextBuilder:
         for p in players:
             stats_str = ", ".join([f"{k.replace('_', ' ').title()}: {v}" for k, v in p.get("stats", {}).items()])
             radar_str = ", ".join([f"{k.title()}: {v}" for k, v in p.get("radar", {}).items()])
-            ctx += (
-                f"- Name: {p['name']}\n"
-                f"  Team: {p['team']} | Position: {p['position']}\n"
-                f"  Status: {p['status']} | Fitness: {p['fitness']} | Rating: {p['rating']}/100\n"
-                f"  Stats: {stats_str}\n"
-                f"  Radar Attributes: {radar_str}\n"
-            )
+            ctx += f"- Name: {p['name']}\n  Team: {p['team']} | Position: {p['position']}\n  Status: {p['status']} | Fitness: {p['fitness']} | Rating: {p['rating']}/100\n  Stats: {stats_str}\n  Radar Attributes: {radar_str}\n"
         return ctx
 
     @staticmethod
@@ -79,11 +73,7 @@ class ContextBuilder:
             if m.get("id") == "bracket_structure":
                 continue
             events_str = "; ".join([f"[{e['time']}] {e['type'].title()} by {e['player']} ({e['detail']})" for e in m.get("events", [])])
-            ctx += (
-                f"- Match {m['home_team']} vs {m['away_team']} ({m['stage']})\n"
-                f"  Status: {m['status'].upper()} | Date/Time: {m['datetime']}\n"
-                f"  Score: {m['home_score']} - {m['away_score']}\n"
-            )
+            ctx += f"- Match {m['home_team']} vs {m['away_team']} ({m['stage']})\n  Status: {m['status'].upper()} | Date/Time: {m['datetime']}\n  Score: {m['home_score']} - {m['away_score']}\n"
             if m.get("status") == "live" and m.get("minute"):
                 ctx += f"  Current Minute: {m['minute']}'\n"
             if events_str:

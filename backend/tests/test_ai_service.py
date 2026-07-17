@@ -95,7 +95,7 @@ def test_ai_service_generate_response_empty_text():
     service.initialized = True
     mock_model = MagicMock()
     mock_response = MagicMock()
-    mock_response.text = "" # empty text
+    mock_response.text = ""  # empty text
     mock_model.generate_content.return_value = mock_response
     service.model = mock_model
     assert service.generate_ai_response("sys", "prompt") == ""
@@ -109,4 +109,3 @@ def test_ai_service_load_json_exceptions():
         # answer_assistant_query should log warning and continue fallback
         res = service.answer_assistant_query("hello", "context", "gate_a", {}, {}, "en")
         assert "Smart Stadium Assistant" in res
-

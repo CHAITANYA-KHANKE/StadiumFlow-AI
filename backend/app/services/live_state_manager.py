@@ -32,7 +32,7 @@ class LiveStateManager:
     def load_static_data(self):
         # Load Stadium nodes/edges
         if os.path.exists(self.stadium_data_path):
-            with open(self.stadium_data_path, 'r', encoding='utf-8') as f:
+            with open(self.stadium_data_path, "r", encoding="utf-8") as f:
                 data = json.load(f)
                 self.edges = data.get("edges", [])
                 for node in data.get("nodes", []):
@@ -40,7 +40,7 @@ class LiveStateManager:
 
         # Load Scenarios
         if os.path.exists(self.scenarios_data_path):
-            with open(self.scenarios_data_path, 'r', encoding='utf-8') as f:
+            with open(self.scenarios_data_path, "r", encoding="utf-8") as f:
                 sc_list = json.load(f)
                 for sc in sc_list:
                     self.scenarios[sc["id"]] = sc
@@ -60,11 +60,11 @@ class LiveStateManager:
         # Set baseline queues for restrooms and food
         for node_id, node in self.nodes.items():
             if node["category"] == "restroom":
-                self.facility_queues[node_id] = 3.0 # baseline 3 mins
+                self.facility_queues[node_id] = 3.0  # baseline 3 mins
             elif node["category"] == "food":
-                self.facility_queues[node_id] = 5.0 # baseline 5 mins
+                self.facility_queues[node_id] = 5.0  # baseline 5 mins
             elif node["category"] in ["medical", "info"]:
-                self.facility_queues[node_id] = 2.0 # baseline 2 mins
+                self.facility_queues[node_id] = 2.0  # baseline 2 mins
 
         self.last_updated = time.time()
 
@@ -96,8 +96,7 @@ class LiveStateManager:
                 if node["category"] in ["restroom", "food"]:
                     # If facility is connected to a congested concourse, scale its queue
                     for edge in self.edges:
-                        if (edge["source"] == c_id and edge["destination"] == node_id) or \
-                           (edge["source"] == node_id and edge["destination"] == c_id):
+                        if (edge["source"] == c_id and edge["destination"] == node_id) or (edge["source"] == node_id and edge["destination"] == c_id):
                             self.facility_queues[node_id] = round(self.facility_queues[node_id] * multiplier, 1)
 
         self.last_updated = time.time()
@@ -107,13 +106,7 @@ class LiveStateManager:
         # Formulate active incidents as IncidentSchema
         incidents = []
         for inc in self.active_incidents:
-            incidents.append(IncidentSchema(
-                id=inc["id"],
-                title=inc["title"],
-                severity=inc["severity"],
-                zone_id=inc["zone_id"],
-                message=inc["message"]
-            ))
+            incidents.append(IncidentSchema(id=inc["id"], title=inc["title"], severity=inc["severity"], zone_id=inc["zone_id"], message=inc["message"]))
 
         return {
             "gate_security_wait": self.gate_security_wait,
@@ -121,8 +114,9 @@ class LiveStateManager:
             "concourse_congestion": self.concourse_congestion,
             "facility_closures": self.facility_closures,
             "active_incidents": incidents,
-            "last_updated": self.last_updated
+            "last_updated": self.last_updated,
         }
+
 
 # Global live state manager instance
 live_state_manager = LiveStateManager()

@@ -67,17 +67,9 @@ class SimulationEngine:
             critical_zones.append(f_id)
 
         # Calculate reports
-        entry_time_report = ImpactReport(
-            before_value=round(avg_wait_before, 1),
-            after_value=round(avg_wait_after, 1),
-            change=round(avg_wait_after - avg_wait_before, 1)
-        )
+        entry_time_report = ImpactReport(before_value=round(avg_wait_before, 1), after_value=round(avg_wait_after, 1), change=round(avg_wait_after - avg_wait_before, 1))
 
-        crowd_pressure_report = ImpactReport(
-            before_value=round(avg_cong_before, 2),
-            after_value=round(avg_cong_after, 2),
-            change=round(avg_cong_after - avg_cong_before, 2)
-        )
+        crowd_pressure_report = ImpactReport(before_value=round(avg_cong_before, 2), after_value=round(avg_cong_after, 2), change=round(avg_cong_after - avg_cong_before, 2))
 
         # Build local impact explanation
         explanation = f"Scenario '{sc['name']}' applied. "
@@ -102,7 +94,7 @@ class SimulationEngine:
             average_entry_time_report=entry_time_report,
             crowd_pressure_report=crowd_pressure_report,
             critical_zones=list(set(critical_zones)),
-            ai_impact_summary=explanation
+            ai_impact_summary=explanation,
         )
 
     def reset_simulation(self) -> str:
@@ -113,6 +105,7 @@ class SimulationEngine:
         """
         self.manager.reset_to_default()
         return "Simulation state reset to Normal Operations."
+
 
 # Global simulation engine instance
 simulation_engine = SimulationEngine()

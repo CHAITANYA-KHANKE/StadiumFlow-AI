@@ -23,22 +23,22 @@ class RoutingEngine:
         node_v = self.manager.nodes.get(v)
 
         if not node_u or not node_v:
-            return float('inf')
+            return float("inf")
 
         # 1. Closure Penalty (Infinity if closed)
         if edge.get("status") == "closed":
-            return float('inf')
+            return float("inf")
         if u in self.manager.gate_closures or v in self.manager.gate_closures:
-            return float('inf')
+            return float("inf")
         if u in self.manager.facility_closures or v in self.manager.facility_closures:
-            return float('inf')
+            return float("inf")
 
         # 2. Accessibility Check
         if accessibility_mode:
             if not edge.get("accessible", True):
-                return float('inf')
+                return float("inf")
             if not node_u.get("accessible", True) or not node_v.get("accessible", True):
-                return float('inf')
+                return float("inf")
 
         # Base Distance
         distance = edge.get("distance", 1.0)
@@ -82,10 +82,10 @@ class RoutingEngine:
         for edge in self.manager.edges:
             u, v = edge["source"], edge["destination"]
             adj[u].append((v, edge))
-            adj[v].append((u, edge)) # Undirected graph
+            adj[v].append((u, edge))  # Undirected graph
 
         # Dijkstra distances
-        distances = {node_id: float('inf') for node_id in self.manager.nodes}
+        distances = {node_id: float("inf") for node_id in self.manager.nodes}
         previous: Dict[str, Optional[str]] = {node_id: None for node_id in self.manager.nodes}
         distances[start] = 0.0
 
@@ -103,7 +103,7 @@ class RoutingEngine:
 
             for v, edge in adj[u]:
                 cost = self.get_edge_cost(u, v, edge, accessibility_mode)
-                if cost == float('inf'):
+                if cost == float("inf"):
                     continue
 
                 new_dist = current_dist + cost
@@ -112,8 +112,8 @@ class RoutingEngine:
                     previous[v] = u
                     heapq.heappush(pq, (new_dist, v))
 
-        if distances[end] == float('inf'):
-            return [], float('inf')
+        if distances[end] == float("inf"):
+            return [], float("inf")
 
         # Reconstruct path
         path = []
@@ -136,15 +136,7 @@ class RoutingEngine:
         path, total_cost = self.solve_dijkstra(start, end, acc_mode)
 
         if not path:
-            return RouteResponse(
-                path_nodes=[],
-                path_steps=[],
-                total_distance=0.0,
-                estimated_time=0.0,
-                accessible=acc_mode,
-                crowd_congestion_level=1.0,
-                reason_explanation="No accessible route found."
-            )
+            return RouteResponse(path_nodes=[], path_steps=[], total_distance=0.0, estimated_time=0.0, accessible=acc_mode, crowd_congestion_level=1.0, reason_explanation="No accessible route found.")
 
         # Calculate real physical distance (sum of edge distances)
         total_distance = 0.0
@@ -163,26 +155,15 @@ class RoutingEngine:
             else:
                 desc = f"Proceed through {node['name']}."
 
-            path_steps.append(RouteStep(
-                node_id=node_id,
-                name=node["name"],
-                x=node["x"],
-                y=node["y"],
-                z=node["z"],
-                description=desc
-            ))
+            path_steps.append(RouteStep(node_id=node_id, name=node["name"], x=node["x"], y=node["y"], z=node["z"], description=desc))
 
             # Distance accumulation
             if i > 0:
-                u, v = path[i-1], path[i]
+                u, v = path[i - 1], path[i]
                 for edge in self.manager.edges:
-                    if (edge["source"] == u and edge["destination"] == v) or \
-                       (edge["source"] == v and edge["destination"] == u):
+                    if (edge["source"] == u and edge["destination"] == v) or (edge["source"] == v and edge["destination"] == u):
                         total_distance += edge["distance"]
-                        congestion_multipliers.append(max(
-                            self.manager.concourse_congestion.get(u, 1.0),
-                            self.manager.concourse_congestion.get(v, 1.0)
-                        ))
+                        congestion_multipliers.append(max(self.manager.concourse_congestion.get(u, 1.0), self.manager.concourse_congestion.get(v, 1.0)))
                         break
 
         avg_congestion = sum(congestion_multipliers) / len(congestion_multipliers) if congestion_multipliers else 1.0
@@ -203,15 +184,8 @@ class RoutingEngine:
         # GenAI Explanation outline (reason_explanation will be grounded by ai_service or custom formatter)
         explanation = f"Suggested path uses {len(path_steps)} steps. Total distance is {round(total_distance, 1)}m with an estimated travel time of {estimated_time} minutes."
 
-        return RouteResponse(
-            path_nodes=path,
-            path_steps=path_steps,
-            total_distance=round(total_distance, 1),
-            estimated_time=estimated_time,
-            accessible=acc_mode,
-            crowd_congestion_level=round(avg_congestion, 2),
-            reason_explanation=explanation
-        )
+        return RouteResponse(path_nodes=path, path_steps=path_steps, total_distance=round(total_distance, 1), estimated_time=estimated_time, accessible=acc_mode, crowd_congestion_level=round(avg_congestion, 2), reason_explanation=explanation)
+
 
 # Global routing engine instance
 routing_engine = RoutingEngine()

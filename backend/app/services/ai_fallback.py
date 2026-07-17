@@ -5,29 +5,13 @@ class AIFallbackService:
     @staticmethod
     def get_route_explanation(start_name: str, end_name: str, total_dist: float, est_time: float, avg_cong: float, lang: str = "en") -> str:
         if lang == "hi":
-            return (
-                f"{start_name} से {end_name} तक का मार्ग चुना गया है। "
-                f"कुल दूरी {total_dist} मीटर है और चलने में लगभग {est_time} मिनट लगेंगे। "
-                f"इस मार्ग पर औसत भीड़ का स्तर {avg_cong}x है।"
-            )
+            return f"{start_name} से {end_name} तक का मार्ग चुना गया है। कुल दूरी {total_dist} मीटर है और चलने में लगभग {est_time} मिनट लगेंगे। इस मार्ग पर औसत भीड़ का स्तर {avg_cong}x है।"
         elif lang == "hinglish":
-            return (
-                f"{start_name} se {end_name} tak ka rasta select kiya gaya hai. "
-                f"Total distance {total_dist} meters hai aur walk karne me lagbhag {est_time} minutes lagenge. "
-                f"Is route par average congestion level {avg_cong}x hai."
-            )
+            return f"{start_name} se {end_name} tak ka rasta select kiya gaya hai. Total distance {total_dist} meters hai aur walk karne me lagbhag {est_time} minutes lagenge. Is route par average congestion level {avg_cong}x hai."
         elif lang == "es":
-            return (
-                f"Su ruta desde {start_name} hasta {end_name} ha sido calculada. "
-                f"La distancia total es de {total_dist} metros, tomando aproximadamente {est_time} minutos a pie. "
-                f"La ruta tiene un nivel promedio de congestión de {avg_cong}x."
-            )
+            return f"Su ruta desde {start_name} hasta {end_name} ha sido calculada. La distancia total es de {total_dist} metros, tomando aproximadamente {est_time} minutos a pie. La ruta tiene un nivel promedio de congestión de {avg_cong}x."
         else:
-            return (
-                f"Your route from {start_name} to {end_name} is calculated. "
-                f"Total distance is {total_dist} meters, taking approximately {est_time} minutes to walk. "
-                f"The path has an average crowd congestion level of {avg_cong}x."
-            )
+            return f"Your route from {start_name} to {end_name} is calculated. Total distance is {total_dist} meters, taking approximately {est_time} minutes to walk. The path has an average crowd congestion level of {avg_cong}x."
 
     @staticmethod
     def get_recommendation_explanation(recommended_option: str, category: str, est_time: float, time_saved: float, reason_codes: List[str], closest_name: str, lang: str = "en") -> str:
@@ -45,25 +29,13 @@ class AIFallbackService:
 
         if time_saved > 0:
             if lang == "hi":
-                return (
-                    f"हम {recommended_option} की सलाह देते हैं। यह निकटतम विकल्प ({closest_name}) से थोड़ा दूर है, "
-                    f"लेकिन कम कतार होने के कारण आपके {time_saved} मिनट बचेंगे! कुल समय: {est_time} मिनट।"
-                )
+                return f"हम {recommended_option} की सलाह देते हैं। यह निकटतम विकल्प ({closest_name}) से थोड़ा दूर है, लेकिन कम कतार होने के कारण आपके {time_saved} मिनट बचेंगे! कुल समय: {est_time} मिनट।"
             elif lang == "hinglish":
-                return (
-                    f"Hum {recommended_option} suggest karte hain. Ye nearest option ({closest_name}) se thoda door hai, "
-                    f"lekin queue choti hone ke karan aapke {time_saved} minutes bachenge! Total time: {est_time} minutes."
-                )
+                return f"Hum {recommended_option} suggest karte hain. Ye nearest option ({closest_name}) se thoda door hai, lekin queue choti hone ke karan aapke {time_saved} minutes bachenge! Total time: {est_time} minutes."
             elif is_spanish:
-                return (
-                    f"Recomendamos {recommended_option}. Está un poco más lejos que la opción más cercana ({closest_name}), "
-                    f"pero su fila más corta le ahorrará aproximadamente {time_saved} minutos en total. Tiempo estimado: {est_time} min."
-                )
+                return f"Recomendamos {recommended_option}. Está un poco más lejos que la opción más cercana ({closest_name}), pero su fila más corta le ahorrará aproximadamente {time_saved} minutos en total. Tiempo estimado: {est_time} min."
             else:
-                return (
-                    f"We recommend {recommended_option}. It is slightly farther than the closest option ({closest_name}), "
-                    f"but its shorter queue will save you about {time_saved} minutes overall. Total expected time: {est_time} mins."
-                )
+                return f"We recommend {recommended_option}. It is slightly farther than the closest option ({closest_name}), but its shorter queue will save you about {time_saved} minutes overall. Total expected time: {est_time} mins."
 
         if lang == "hi":
             return f"हमने आपके लिए {recommended_option} का सुझाव दिया है। कुल अपेक्षित समय: {est_time} मिनट।"
@@ -155,7 +127,7 @@ class AIFallbackService:
                 return "We have multiple food concessions (stalls, sports bars). Please check the 'Facility Explorer' to see which counter has the shortest queue time right now."
 
         if "gate" in q_lower or "entrance" in q_lower or "entry" in q_lower or "dwar" in q_lower or "puerta" in q_lower:
-            closed_gates = [nodes.get(g_id, {}).get('name', g_id) for g_id in live_state.get("gate_closures", [])]
+            closed_gates = [nodes.get(g_id, {}).get("name", g_id) for g_id in live_state.get("gate_closures", [])]
             if closed_gates:
                 closed_str = ", ".join(closed_gates)
                 if lang == "hi":
@@ -177,22 +149,10 @@ class AIFallbackService:
                     return "All entry gates are open. Security queues are operating at a standard 5-minute wait time."
 
         if lang == "hi":
-            return (
-                "मैं आपका स्मार्ट स्टेडियम सहायक हूँ। आप मुझसे मार्ग नेविगेशन, निकटतम शौचालय, फूड स्टॉल, "
-                "एक्सेसिबिलिटी मार्ग या वर्तमान स्थिति के बारे में पूछ सकते हैं।"
-            )
+            return "मैं आपका स्मार्ट स्टेडियम सहायक हूँ। आप मुझसे मार्ग नेविगेशन, निकटतम शौचालय, फूड स्टॉल, एक्सेसिबिलिटी मार्ग या वर्तमान स्थिति के बारे में पूछ सकते हैं।"
         elif lang == "hinglish":
-            return (
-                "Main aapka Smart Stadium assistant hoon. Aap mujhse routing, nearest toilet, food stall, "
-                "accessibility paths ya live stadium status ke baare me puch sakte hain."
-            )
+            return "Main aapka Smart Stadium assistant hoon. Aap mujhse routing, nearest toilet, food stall, accessibility paths ya live stadium status ke baare me puch sakte hain."
         elif is_spanish:
-            return (
-                "Soy su asistente inteligente del estadio. Puede preguntarme sobre navegación, baños, puestos de comida, "
-                "rutas de accesibilidad o el estado de la simulación en vivo."
-            )
+            return "Soy su asistente inteligente del estadio. Puede preguntarme sobre navegación, baños, puestos de comida, rutas de accesibilidad o el estado de la simulación en vivo."
         else:
-            return (
-                "I am your Smart Stadium Assistant. You can ask me about navigation, restrooms, food stalls, "
-                "accessibility routes, or real-time simulation updates."
-            )
+            return "I am your Smart Stadium Assistant. You can ask me about navigation, restrooms, food stalls, accessibility routes, or real-time simulation updates."

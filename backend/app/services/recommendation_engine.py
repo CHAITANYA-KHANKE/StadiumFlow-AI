@@ -51,7 +51,7 @@ class RecommendationEngine:
                 alternatives=[],
                 data_timestamp=self.manager.last_updated,
                 confidence=1.0,
-                reason_explanation="There are no active or accessible facilities of this category."
+                reason_explanation="There are no active or accessible facilities of this category.",
             )
 
         options = []
@@ -65,10 +65,9 @@ class RecommendationEngine:
             # Calculate actual physical distance (meters)
             distance = 0.0
             for i in range(len(path) - 1):
-                u, v = path[i], path[i+1]
+                u, v = path[i], path[i + 1]
                 for edge in self.manager.edges:
-                    if (edge["source"] == u and edge["destination"] == v) or \
-                       (edge["source"] == v and edge["destination"] == u):
+                    if (edge["source"] == u and edge["destination"] == v) or (edge["source"] == v and edge["destination"] == u):
                         distance += edge["distance"]
                         break
 
@@ -78,14 +77,7 @@ class RecommendationEngine:
             queue_time = round(self.manager.facility_queues.get(fac_id, 0.0), 1)
             total_time = round(walking_time + queue_time, 1)
 
-            options.append({
-                "facility_id": fac_id,
-                "name": fac["name"],
-                "walking_time": walking_time,
-                "queue_time": queue_time,
-                "total_time": total_time,
-                "accessible": fac.get("accessible", True)
-            })
+            options.append({"facility_id": fac_id, "name": fac["name"], "walking_time": walking_time, "queue_time": queue_time, "total_time": total_time, "accessible": fac.get("accessible", True)})
 
         if not options:
             return RecommendationResponse(
@@ -97,7 +89,7 @@ class RecommendationEngine:
                 alternatives=[],
                 data_timestamp=self.manager.last_updated,
                 confidence=1.0,
-                reason_explanation="No facilities are reachable from your current location."
+                reason_explanation="No facilities are reachable from your current location.",
             )
 
         # Sort options:
@@ -122,19 +114,12 @@ class RecommendationEngine:
             if best_opt["queue_time"] < closest_opt["queue_time"]:
                 reason_codes.append("SHORTER_QUEUE")
             if best_opt["walking_time"] > closest_opt["walking_time"]:
-                reason_codes.append("LOWER_CONGESTION") # Walk slightly farther to avoid queues
+                reason_codes.append("LOWER_CONGESTION")  # Walk slightly farther to avoid queues
 
         # Build alternative options list (excluding the best one)
         alternatives = []
         for opt in best_options[1:]:
-            alternatives.append(AlternativeOption(
-                facility_id=opt["facility_id"],
-                name=opt["name"],
-                walking_time=opt["walking_time"],
-                queue_time=opt["queue_time"],
-                total_time=opt["total_time"],
-                accessible=opt["accessible"]
-            ))
+            alternatives.append(AlternativeOption(facility_id=opt["facility_id"], name=opt["name"], walking_time=opt["walking_time"], queue_time=opt["queue_time"], total_time=opt["total_time"], accessible=opt["accessible"]))
 
         # Build grounded explanation
         explanation = f"Recommended {best_opt['name']} (Estimated total time: {best_opt['total_time']} mins)."
@@ -150,8 +135,9 @@ class RecommendationEngine:
             alternatives=alternatives,
             data_timestamp=self.manager.last_updated,
             confidence=0.95 if time_saved > 0 else 0.85,
-            reason_explanation=explanation
+            reason_explanation=explanation,
         )
+
 
 # Global recommendation engine instance
 recommendation_engine = RecommendationEngine()

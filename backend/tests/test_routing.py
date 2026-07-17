@@ -8,11 +8,7 @@ from backend.app.services.routing_engine import routing_engine
 def test_routing_normal():
     # Normal operation routing
     live_state_manager.reset_to_default()
-    req = RouteRequest(
-        start_node_id="gate_a",
-        end_node_id="section_101",
-        accessibility_mode=False
-    )
+    req = RouteRequest(start_node_id="gate_a", end_node_id="section_101", accessibility_mode=False)
     res = routing_engine.calculate_route(req)
     assert len(res.path_nodes) > 0
     assert res.total_distance > 0.0
@@ -27,21 +23,13 @@ def test_accessibility_routing_stairs_avoided():
     live_state_manager.reset_to_default()
 
     # Non-accessibility mode should find a path (likely using stairs since it's closer)
-    req_normal = RouteRequest(
-        start_node_id="concourse_lower_0",
-        end_node_id="concourse_upper_0",
-        accessibility_mode=False
-    )
+    req_normal = RouteRequest(start_node_id="concourse_lower_0", end_node_id="concourse_upper_0", accessibility_mode=False)
     res_normal = routing_engine.calculate_route(req_normal)
     assert len(res_normal.path_nodes) > 0
     assert "stairs_north_bottom" in res_normal.path_nodes
 
     # Accessibility mode should avoid stairs and go via elevator
-    req_acc = RouteRequest(
-        start_node_id="concourse_lower_0",
-        end_node_id="concourse_upper_0",
-        accessibility_mode=True
-    )
+    req_acc = RouteRequest(start_node_id="concourse_lower_0", end_node_id="concourse_upper_0", accessibility_mode=True)
     res_acc = routing_engine.calculate_route(req_acc)
     assert len(res_acc.path_nodes) > 0
     assert "stairs_north_bottom" not in res_acc.path_nodes
@@ -58,8 +46,8 @@ def test_congestion_aware_routing():
     # and force it to find a detour if possible, or increase the cost/estimated time
     req = RouteRequest(
         start_node_id="gate_a",
-        end_node_id="section_102", # at 45 deg
-        accessibility_mode=False
+        end_node_id="section_102",  # at 45 deg
+        accessibility_mode=False,
     )
     res = routing_engine.calculate_route(req)
     assert len(res.path_nodes) > 0
@@ -71,11 +59,7 @@ def test_gate_closure_unreachable():
     live_state_manager.reset_to_default()
     live_state_manager.gate_closures.append("gate_c")
 
-    req = RouteRequest(
-        start_node_id="gate_c",
-        end_node_id="section_103",
-        accessibility_mode=False
-    )
+    req = RouteRequest(start_node_id="gate_c", end_node_id="section_103", accessibility_mode=False)
     res = routing_engine.calculate_route(req)
     assert len(res.path_nodes) == 0
     assert res.reason_explanation == "No accessible route found."
@@ -89,16 +73,16 @@ def test_routing_edge_cases():
 
     # 2. Get edge cost for non-existent node
     cost = routing_engine.get_edge_cost("invalid_node", "gate_a", {}, False)
-    assert cost == float('inf')
+    assert cost == float("inf")
 
     # 3. Closed edge status returns infinity
     cost_closed = routing_engine.get_edge_cost("gate_a", "gate_b", {"status": "closed"}, False)
-    assert cost_closed == float('inf')
+    assert cost_closed == float("inf")
 
     # 4. Inaccessible nodes under accessibility mode returns infinity
     live_state_manager.nodes["gate_a"]["accessible"] = False
     cost_inacc = routing_engine.get_edge_cost("gate_a", "gate_b", {}, True)
-    assert cost_inacc == float('inf')
+    assert cost_inacc == float("inf")
     live_state_manager.nodes["gate_a"]["accessible"] = True
 
     # 5. Non-existent scenario on live state manager returns False
@@ -109,9 +93,11 @@ def test_routing_edge_cases():
 def test_dijkstra_stale_entry_continue():
     import heapq
     from unittest.mock import patch
+
     original_heappush = heapq.heappush
 
     calls = []
+
     def mock_heappush(pq, item):
         original_heappush(pq, item)
         # If we push concourse_lower_0, also push a stale entry with slightly larger distance
@@ -120,10 +106,6 @@ def test_dijkstra_stale_entry_continue():
             original_heappush(pq, (item[0] + 1.0, "concourse_lower_0"))
 
     with patch("backend.app.services.routing_engine.heapq.heappush", side_effect=mock_heappush):
-        req = RouteRequest(
-            start_node_id="gate_a",
-            end_node_id="section_101",
-            accessibility_mode=False
-        )
+        req = RouteRequest(start_node_id="gate_a", end_node_id="section_101", accessibility_mode=False)
         res = routing_engine.calculate_route(req)
         assert len(res.path_nodes) > 0

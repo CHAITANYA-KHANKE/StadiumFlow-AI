@@ -7,13 +7,7 @@ def test_timeline_generation():
     live_state_manager.reset_to_default()
 
     # 1. Base wait of 5 mins at Gate A
-    req = TimelineRequest(
-        ticket_seat_section="Section 104",
-        ticket_seat_row="G",
-        ticket_seat_number="12",
-        arrival_gate_id="gate_a",
-        accessibility_mode=False
-    )
+    req = TimelineRequest(ticket_seat_section="Section 104", ticket_seat_row="G", ticket_seat_number="12", arrival_gate_id="gate_a", accessibility_mode=False)
     res = timeline_engine.generate_timeline(req)
 
     assert len(res.steps) == 7
@@ -35,25 +29,13 @@ def test_timeline_edge_cases():
     live_state_manager.reset_to_default()
 
     # 1. Invalid seat section
-    req = TimelineRequest(
-        ticket_seat_section="Invalid Seat Section",
-        ticket_seat_row="G",
-        ticket_seat_number="12",
-        arrival_gate_id="gate_a",
-        accessibility_mode=False
-    )
+    req = TimelineRequest(ticket_seat_section="Invalid Seat Section", ticket_seat_row="G", ticket_seat_number="12", arrival_gate_id="gate_a", accessibility_mode=False)
     res = timeline_engine.generate_timeline(req)
     assert len(res.steps) == 7
 
     # 2. exit_transport_block scenario with gate_e
     live_state_manager.current_scenario_id = "exit_transport_block"
-    req_exit = TimelineRequest(
-        ticket_seat_section="Section 104",
-        ticket_seat_row="G",
-        ticket_seat_number="12",
-        arrival_gate_id="gate_e",
-        accessibility_mode=False
-    )
+    req_exit = TimelineRequest(ticket_seat_section="Section 104", ticket_seat_row="G", ticket_seat_number="12", arrival_gate_id="gate_e", accessibility_mode=False)
     res_exit = timeline_engine.generate_timeline(req_exit)
     exit_step = [s for s in res_exit.steps if s.type == "exit"][0]
     assert "Delay estimate: 40 minutes" in exit_step.description

@@ -6,10 +6,12 @@ from pydantic import BaseModel
 class ScenarioTriggerRequest(BaseModel):
     scenario_id: str
 
+
 class ImpactReport(BaseModel):
     before_value: float
     after_value: float
     change: float
+
 
 class SimulationImpactResponse(BaseModel):
     scenario_id: str

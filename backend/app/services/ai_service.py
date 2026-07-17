@@ -7,9 +7,11 @@ from backend.app.services.ai_fallback import AIFallbackService
 # Safe import of Google GenAI SDK
 try:
     import google.generativeai as genai
+
     HAS_GEMINI_SDK = True
 except ImportError:
     HAS_GEMINI_SDK = False
+
 
 class AIService:
     def __init__(self):
@@ -20,10 +22,7 @@ class AIService:
         if HAS_GEMINI_SDK and self.api_key:
             try:
                 genai.configure(api_key=self.api_key)
-                self.model = genai.GenerativeModel(
-                    model_name=self.model_name,
-                    generation_config={"temperature": 0.2}
-                )
+                self.model = genai.GenerativeModel(model_name=self.model_name, generation_config={"temperature": 0.2})
                 self.initialized = True
             except Exception as e:
                 print(f"WARNING: Gemini SDK initialization failed: {e}")
@@ -34,10 +33,7 @@ class AIService:
             return ""
         try:
             full_prompt = f"{system_instruction}\n\nContext:\n{prompt}"
-            response = self.model.generate_content(
-                full_prompt,
-                request_options={"timeout": 5.0}
-            )
+            response = self.model.generate_content(full_prompt, request_options={"timeout": 5.0})
             if response and response.text:
                 return str(response.text.strip())
             return ""
@@ -62,10 +58,7 @@ class AIService:
             f"{lang_instruction}"
         )
 
-        prompt = (
-            f"Here is the calculated route:\n{context_str}\n"
-            "Explain this path and the estimated time directly to the user in a friendly way."
-        )
+        prompt = f"Here is the calculated route:\n{context_str}\nExplain this path and the estimated time directly to the user in a friendly way."
 
         response = self.generate_ai_response(sys_inst, prompt)
         if not response:
@@ -90,10 +83,7 @@ class AIService:
             f"{lang_instruction}"
         )
 
-        prompt = (
-            f"Structured Recommendation Context:\n{context_str}\n"
-            "Explain the recommendation and time savings."
-        )
+        prompt = f"Structured Recommendation Context:\n{context_str}\nExplain the recommendation and time savings."
 
         response = self.generate_ai_response(sys_inst, prompt)
         if not response:
@@ -138,8 +128,9 @@ class AIService:
         try:
             matches_path = os.path.join(os.path.dirname(__file__), "..", "data", "matches.json")
             if os.path.exists(matches_path):
-                with open(matches_path, 'r', encoding='utf-8') as f:
+                with open(matches_path, "r", encoding="utf-8") as f:
                     import json
+
                     matches_data = json.load(f)
         except Exception as e:
             print(f"WARNING: failed to load matches.json: {e}")
@@ -147,13 +138,15 @@ class AIService:
         try:
             players_path = os.path.join(os.path.dirname(__file__), "..", "data", "players.json")
             if os.path.exists(players_path):
-                with open(players_path, 'r', encoding='utf-8') as f:
+                with open(players_path, "r", encoding="utf-8") as f:
                     import json
+
                     players_data = json.load(f)
         except Exception as e:
             print(f"WARNING: failed to load players.json: {e}")
 
         from backend.app.services.context_builder import ContextBuilder
+
         match_ctx = ContextBuilder.build_match_context(matches_data)
         player_ctx = ContextBuilder.build_player_context(players_data)
         combined_context = f"{context_str}\n{match_ctx}\n{player_ctx}"
@@ -166,16 +159,13 @@ class AIService:
             f"{lang_instruction}"
         )
 
-        prompt = (
-            f"Live Stadium and Tournament Context:\n{combined_context}\n"
-            f"User Question: '{query}'\n"
-            f"Current User Location ID: {current_node} ({nodes.get(current_node, {}).get('name', 'Unknown')})\n"
-        )
+        prompt = f"Live Stadium and Tournament Context:\n{combined_context}\nUser Question: '{query}'\nCurrent User Location ID: {current_node} ({nodes.get(current_node, {}).get('name', 'Unknown')})\n"
 
         response = self.generate_ai_response(sys_inst, prompt)
         if not response:
             return AIFallbackService.get_assistant_answer(query, current_node, live_state, nodes, lang)
         return response
+
 
 # Global AI service instance
 ai_service = AIService()

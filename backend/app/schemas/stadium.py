@@ -12,6 +12,7 @@ class NodeSchema(BaseModel):
     z: float
     accessible: bool
 
+
 class EdgeSchema(BaseModel):
     source: str
     destination: str
@@ -19,16 +20,19 @@ class EdgeSchema(BaseModel):
     accessible: bool
     status: str
 
+
 class StadiumSchema(BaseModel):
     nodes: List[NodeSchema]
     edges: List[EdgeSchema]
 
+
 class IncidentSchema(BaseModel):
     id: str
     title: str
-    severity: str # "low", "medium", "high"
+    severity: str  # "low", "medium", "high"
     zone_id: str
     message: str
+
 
 class LiveStateSchema(BaseModel):
     gate_security_wait: Dict[str, float]
@@ -37,6 +41,7 @@ class LiveStateSchema(BaseModel):
     facility_closures: List[str]
     active_incidents: List[IncidentSchema]
     last_updated: float
+
 
 class FeedbackSchema(BaseModel):
     location_id: str
