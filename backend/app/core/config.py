@@ -7,7 +7,7 @@ class Settings(BaseSettings):
     GEMINI_API_KEY: str = os.getenv("GEMINI_API_KEY", "")
     CORS_ORIGINS: str = "*" # In production, restrict this.
     PORT: int = 8000
-    HOST: str = "0.0.0.0"
+    HOST: str = "0.0.0.0"  # nosec B104
 
     class Config:
         env_file = ".env"

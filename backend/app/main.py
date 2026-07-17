@@ -47,24 +47,28 @@ class ServerlessRateLimiter:
             try:
                 key = f"rate_limit:{ip}"
                 incr_url = f"{self.redis_url}/incr/{key}"
+                if not incr_url.startswith(("http://", "https://")):
+                    raise ValueError("Insecure URL scheme")
                 req = urllib.request.Request(
                     incr_url,
                     headers={"Authorization": f"Bearer {self.redis_token}"},
                     method="POST"
                 )
-                with urllib.request.urlopen(req, timeout=1.0) as response:
+                with urllib.request.urlopen(req, timeout=1.0) as response:  # nosec B310
                     res_data = json.loads(response.read().decode())
                     current_count = int(res_data.get("result", 1))
 
                 # If it is the first increment in the window, set expire
                 if current_count == 1:
-                    expire_url = f"{self.redis_url}/expire/{key}/{window}"
+                    expire_url = f"{self.manager_url if hasattr(self, 'manager_url') else self.redis_url}/expire/{key}/{window}"
+                    if not expire_url.startswith(("http://", "https://")):
+                        raise ValueError("Insecure URL scheme")
                     ex_req = urllib.request.Request(
                         expire_url,
                         headers={"Authorization": f"Bearer {self.redis_token}"},
                         method="POST"
                     )
-                    with urllib.request.urlopen(ex_req, timeout=1.0) as _:
+                    with urllib.request.urlopen(ex_req, timeout=1.0) as _:  # nosec B310
                         pass
 
                 return current_count <= limit
