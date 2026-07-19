@@ -54,7 +54,7 @@ class ServerlessRateLimiter:
 
                 # If it is the first increment in the window, set expire
                 if current_count == 1:
-                    expire_url = f"{self.manager_url if hasattr(self, 'manager_url') else self.redis_url}/expire/{key}/{window}"
+                    expire_url = f"{self.redis_url}/expire/{key}/{window}"
                     if not expire_url.startswith(("http://", "https://")):
                         raise ValueError("Insecure URL scheme")
                     ex_req = urllib.request.Request(expire_url, headers={"Authorization": f"Bearer {self.redis_token}"}, method="POST")
@@ -65,6 +65,18 @@ class ServerlessRateLimiter:
             except Exception as e:
                 # Fallback to local in-memory dict on any network error
                 print(f"Serverless Rate Limiter Warning: Redis check failed, using fallback: {e}")
+
+        # Lazy memory leak cleanup
+        if len(self.local_db) > 1000:
+            expired_ips = []
+            for k, timestamps in self.local_db.items():
+                active = [t for t in timestamps if current_time - t < window]
+                if not active:
+                    expired_ips.append(k)
+                else:
+                    self.local_db[k] = active
+            for k in expired_ips:
+                self.local_db.pop(k, None)
 
         # In-Memory Local Fallback
         if ip in self.local_db:

@@ -70,12 +70,12 @@ export default function TimelineView({
           ></div>
 
           {/* Timeline Nodes */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }} role="list">
             {steps.map((step, idx) => {
               const meta = getStepMeta(step.type);
 
               return (
-                <div key={idx} style={{ display: 'flex', gap: '16px', position: 'relative' }}>
+                <div key={idx} style={{ display: 'flex', gap: '16px', position: 'relative' }} role="listitem">
                   {/* Glowing Node Dot / Icon wrapper */}
                   <div 
                     style={{ 

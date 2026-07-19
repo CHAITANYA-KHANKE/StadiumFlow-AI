@@ -49,6 +49,7 @@ function App() {
   };
 
   const handleBackToLanding = () => {
+    localStorage.removeItem('stadiumflow_admin_token');
     setPage('landing');
   };
 

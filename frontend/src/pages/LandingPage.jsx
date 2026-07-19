@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ParallaxCard from '../components/ParallaxCard';
 import { Users, Shield, Sparkles } from 'lucide-react';
 import { translate } from '../services/translator';
+import { apiService } from '../services/api';
 import landingBg from '../assets/landing_bg.png';
 
 const SECTIONS = [
@@ -37,6 +38,11 @@ export default function LandingPage({ onSelectRole }) {
   const [language, setLanguage] = useState('en');
   const [accessibility, setAccessibility] = useState(false);
 
+  // Admin access state
+  const [adminToken, setAdminToken] = useState('');
+  const [authError, setAuthError] = useState('');
+  const [isValidating, setIsValidating] = useState(false);
+
   useEffect(() => {
     const handleMouseMove = (e) => {
       const { clientX, clientY } = e;
@@ -51,7 +57,7 @@ export default function LandingPage({ onSelectRole }) {
     };
   }, []);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (role === 'fan') {
       const sectionObj = SECTIONS.find(s => s.id === section);
@@ -68,8 +74,19 @@ export default function LandingPage({ onSelectRole }) {
         }
       });
     } else {
-      // Pass language preference to operator too
-      onSelectRole({ role, prefs: { language } });
+      // Validate operator access token via backend API
+      setIsValidating(true);
+      setAuthError('');
+      try {
+        localStorage.setItem('stadiumflow_admin_token', adminToken);
+        await apiService.getOperationsSummary();
+        onSelectRole({ role, prefs: { language } });
+      } catch (err) {
+        setAuthError('Unauthorized operator token. X-Admin-Token header missing or incorrect.');
+        localStorage.removeItem('stadiumflow_admin_token');
+      } finally {
+        setIsValidating(false);
+      }
     }
   };
 
@@ -269,7 +286,8 @@ export default function LandingPage({ onSelectRole }) {
                     className="form-select"
                   >
                     <option value="en">English</option>
-                    <option value="hi">हिन्दी (Hindi)</option>
+                    <option value="hi">हिन्दी (Hindi - Devanagari)</option>
+                    <option value="hinglish">Hinglish (Hindi in Roman script)</option>
                     <option value="es">Español (Spanish)</option>
                     <option value="fr">Français (French)</option>
                     <option value="de">Deutsch (German)</option>
@@ -320,6 +338,29 @@ export default function LandingPage({ onSelectRole }) {
                   <option value="fr">Français (French)</option>
                   <option value="de">Deutsch (German)</option>
                 </select>
+              </div>
+
+              {/* Operator Access Token */}
+              <div style={{ marginBottom: '18px' }}>
+                <label style={{ display: 'block', fontSize: '11px', fontWeight: '700', color: 'rgba(255, 255, 255, 0.6)', marginBottom: '6px', textTransform: 'uppercase' }}>
+                  Operator Access Token
+                </label>
+                <input
+                  type="password"
+                  value={adminToken}
+                  onChange={(e) => {
+                    setAdminToken(e.target.value);
+                    setAuthError('');
+                  }}
+                  placeholder="Enter operator access token..."
+                  className="form-input"
+                  required
+                />
+                {authError && (
+                  <p style={{ color: 'var(--status-closed)', fontSize: '12px', marginTop: '6px', margin: 0 }}>
+                    {authError}
+                  </p>
+                )}
               </div>
 
               <div 

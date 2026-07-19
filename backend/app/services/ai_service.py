@@ -18,6 +18,8 @@ class AIService:
         self.api_key = settings.GEMINI_API_KEY
         self.model_name = "gemini-1.5-flash"
         self.initialized = False
+        self.route_cache = {}
+        self.recommendation_cache = {}
 
         if HAS_GEMINI_SDK and self.api_key:
             try:
@@ -42,6 +44,10 @@ class AIService:
             return ""
 
     def explain_route(self, context_str: str, start_name: str, end_name: str, total_dist: float, est_time: float, avg_cong: float, lang: str = "en") -> str:
+        cache_key = f"{start_name}_{end_name}_{total_dist}_{est_time}_{avg_cong}_{lang}"
+        if cache_key in self.route_cache:
+            return self.route_cache[cache_key]
+
         if lang == "hi":
             lang_instruction = "Respond in Hindi (using Devanagari script, e.g., 'आपका मार्ग गेट सी से शुरू होकर सेक्शन 104 तक जाता है।')."
         elif lang == "hinglish":
@@ -62,10 +68,17 @@ class AIService:
 
         response = self.generate_ai_response(sys_inst, prompt)
         if not response:
-            return AIFallbackService.get_route_explanation(start_name, end_name, total_dist, est_time, avg_cong, lang)
+            fallback = AIFallbackService.get_route_explanation(start_name, end_name, total_dist, est_time, avg_cong, lang)
+            return fallback
+
+        self.route_cache[cache_key] = response
         return response
 
     def explain_recommendation(self, context_str: str, recommended_option: str, category: str, est_time: float, time_saved: float, reason_codes: List[str], closest_name: str, lang: str = "en") -> str:
+        cache_key = f"{recommended_option}_{category}_{est_time}_{time_saved}_{'_'.join(reason_codes)}_{closest_name}_{lang}"
+        if cache_key in self.recommendation_cache:
+            return self.recommendation_cache[cache_key]
+
         if lang == "hi":
             lang_instruction = "Respond in Hindi (using Devanagari script)."
         elif lang == "hinglish":
@@ -87,7 +100,10 @@ class AIService:
 
         response = self.generate_ai_response(sys_inst, prompt)
         if not response:
-            return AIFallbackService.get_recommendation_explanation(recommended_option, category, est_time, time_saved, reason_codes, closest_name, lang)
+            fallback = AIFallbackService.get_recommendation_explanation(recommended_option, category, est_time, time_saved, reason_codes, closest_name, lang)
+            return fallback
+
+        self.recommendation_cache[cache_key] = response
         return response
 
     def explain_operations_brief(self, context_str: str, live_state: Dict[str, Any], nodes: Dict[str, Any], lang: str = "en") -> str:

@@ -500,13 +500,16 @@ export default function FanDashboard({ userPrefs, onBack }) {
                 {/* Recommendations List Table */}
                 <div style={{ overflowX: 'auto' }}>
                   <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '13px', textAlign: 'left' }}>
+                    <caption style={{ position: 'absolute', width: '1px', height: '1px', padding: 0, margin: '-1px', overflow: 'hidden', clip: 'rect(0, 0, 0, 0)', border: 0 }}>
+                      Facility Queue Explorer Recommendations
+                    </caption>
                     <thead>
                       <tr style={{ borderBottom: '1px solid var(--border-light)', color: 'var(--text-muted)' }}>
-                        <th style={{ padding: '8px 12px' }}>{translate('name', language)}</th>
-                        <th style={{ padding: '8px 12px' }}>{translate('walk_time', language)}</th>
-                        <th style={{ padding: '8px 12px' }}>{translate('queue_wait', language)}</th>
-                        <th style={{ padding: '8px 12px' }}>{translate('total_est', language)}</th>
-                        <th style={{ padding: '8px 12px' }}>{translate('actions', language)}</th>
+                        <th scope="col" style={{ padding: '8px 12px' }}>{translate('name', language)}</th>
+                        <th scope="col" style={{ padding: '8px 12px' }}>{translate('walk_time', language)}</th>
+                        <th scope="col" style={{ padding: '8px 12px' }}>{translate('queue_wait', language)}</th>
+                        <th scope="col" style={{ padding: '8px 12px' }}>{translate('total_est', language)}</th>
+                        <th scope="col" style={{ padding: '8px 12px' }}>{translate('actions', language)}</th>
                       </tr>
                     </thead>
                     <tbody>

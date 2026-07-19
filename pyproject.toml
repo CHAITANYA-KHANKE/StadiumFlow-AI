@@ -20,7 +20,7 @@ select = ["E", "F", "W", "C90", "I"]
 ignore = ["E501", "C901"]
 
 [tool.ruff.lint.mccabe]
-max-complexity = 25
+max-complexity = 10
 
 [tool.black]
 line-length = 120
